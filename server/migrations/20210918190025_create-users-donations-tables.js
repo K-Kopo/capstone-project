@@ -7,11 +7,11 @@ exports.up = function(knex) {
       table.string('username').notNullable().defaultTo('Store Manager');
       table.string('password').notNullable();
       table.string('role').notNullable();
-      table.integer('phone').notNullable();
+      table.string('phone').notNullable();
       table.string('email').notNullable();
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
-    .createTable('inventories', (table) => {
+    .createTable('donations', (table) => {
       table.increments('id').primary();
       table.string('type').notNullable();
       table.string('description').notNullable();
@@ -30,5 +30,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('donations').dropTable('users');
+  return knex.schema.dropTable('inventories').dropTable('users');
 };
