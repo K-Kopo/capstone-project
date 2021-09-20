@@ -4,7 +4,7 @@ const Donation = require("../models/donation");
 const User = require("../models/user");
 
 
-// get all inventories
+// get all donations
 router
     .route("/")
     .get((req, res) => {
@@ -22,13 +22,13 @@ router
             .then(
                 (user) => {
                     console.log("User found");
-                    return warehouse;
+                    return user;
                 },
                 () => res.status(404).json({ message: "User not found" })
             )
             .then((user) => {
                 new Donation({
-                    name: req.body.name,
+                    
                     description: req.body.description,
                     user_id: user.id,
                     amount: req.body.amount,
@@ -64,10 +64,10 @@ router
     .put((req, res) => {
         Donation.where({ id: req.params.id })
             .fetch()
-            .then((inventory) => {
-                inventory
+            .then((donation) => {
+                donation
                     .save({
-                        name: req.body.name,
+                        
                         description: req.body.description,
                         user_id: req.body.user_id,
                         amount: req.body.amount,
@@ -85,11 +85,11 @@ router
     .delete((req, res) => {
         Donation.where("id", req.params.id)
             .destroy()
-            .then(() => {
+            .then((deletedDonation) => {
                 console.log(deletedDonation);
 
                 res.status(200).json({
-                    message: `Donation ${req.params.id} deleted successfully`,
+                    message: `Donation deleted successfully`,
                 });
             })
             .catch(() => res.status(400).json({ message: "Error, can't delete donation" }));
