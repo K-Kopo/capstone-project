@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: flex-end;
+    background-color: cornflowerblue;
+    // color: orangered;
+    &__navlist {
+        display: flex;
+        flex-direction: row;
+        
+        &--link {
+           list-style: none;
+           
+        }
+    }
+}
+a {
+    text-decoration: none;
+    &:visited {
+        color: red;
+    }
+    &:link {
+        color: yellow;
+    }
+    &:hover {
+        color:yellowgreen;
+    }
+}

@@ -1,10 +1,13 @@
 import React from 'react';
+import "./HomePage.scss";
+import {Link} from 'react-router-dom';
 
 const HomePage = () => {
     return (
-        <div>
+        <section className="homepage">
             This is the home you've always dreamed of!
-        </div>
+            <Link to="/signup" ><button>Sign Up / Log In</button></Link>
+        </section>
     );
 };
 
