@@ -9,6 +9,19 @@ require('dotenv').config();
 const SALT_ROUNDS = 8;
 const JWT_SECRET = process.env.JWT_SECRET;
 
+const signJWTToken = user => {
+    const token = jwt.sign(
+      {
+        id: user.id,
+        sub: user.attributes.username
+      },
+      JWT_SECRET,
+      { expiresIn: '8h' }
+    );
+  
+    return token;
+  }
+
 // get all users
 router.route("/").get((req, res) => {
   user
@@ -44,7 +57,7 @@ router.route("/signup").post((req, res) => {
       name: req.body.name,
       username: req.body.username,
       role: req.body.role,
-      password: req.body.password,
+      password: hashedPassword,
       phone: req.body.phone,
       email: req.body.email,
     })
@@ -58,4 +71,26 @@ router.route("/signup").post((req, res) => {
       );
   });
 });
+
+router.route("/login").post((req, res) => {
+    const {username, password} = req.body
+
+    user 
+    .where({username})
+    .fetch()
+    .then(user => {
+        bcrypt.compare(password, user.attributes.password, function(_, success) {
+            if (success) {
+                const token = signJWTToken(user);
+                return res.status(200).json({authToken: token});
+            } else {
+                return res.status(403).json({message: 'username and password do not jive'});
+            }
+        })
+    })
+    .catch(()=> {
+        return res.status(400).json({message: "no user found"});
+    }
+    )
+})
 module.exports = router;
