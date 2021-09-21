@@ -30,22 +30,22 @@ router.route("/").get((req, res) => {
       res.status(200).json(users);
     })
     .catch(() => {
-      res.status(400).json({ message: "Error can't get userss" });
+      res.status(400).json({ message: "Error can't get users" });
     });
 });
 
 // get single users by id
-router.route("/:id").get((req, res) => {
-  user
-    .where({ id: req.params.id })
-    .fetch({ withRelated: ["donations"] })
-    .then((user) => {
-      res.status(200).json(user);
-    })
-    .catch(() => {
-      res.status(400).json({ message: "Error, can't get users" });
-    });
-});
+// router.route("/:id").get((req, res) => {
+//   user
+//     .where({ id: req.params.id })
+//     .fetch({ withRelated: ["donations"] })
+//     .then((user) => {
+//       res.status(200).json(user);
+//     })
+//     .catch(() => {
+//       res.status(400).json({ message: "Error, can't get users" });
+//     });
+// });
 
 router.route("/signup").post((req, res) => {
   const { password } = req.body;
@@ -93,4 +93,24 @@ console.log(req.body);
     }
     )
 })
+
+router.route('/profile').get((req, res) => {
+    if (!req.headers.authorization) return res.status(401).json({ message: 'This route requires authentication token' });
+  
+    const authToken = req.headers.authorization.split(' ')[1];
+  
+    jwt.verify(authToken, JWT_SECRET, (err, decoded) => {
+      if (err) return res.status(401).json({ message: 'The token is invalid' });
+  
+      user
+        .where({ id: decoded.id, username: decoded.sub })
+        .fetch()
+        .then(user => {
+          res.status(200).json(user);
+        })
+        .catch(() => {
+          res.status(400).json({ message: "Can't fetch the user profile "});
+        })
+    })
+  });
 module.exports = router;

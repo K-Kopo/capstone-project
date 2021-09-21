@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const LogInPage = () => {
+const LogInPage = ({history}) => {
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -26,6 +26,7 @@ const LogInPage = () => {
       .then((res) => {
         sessionStorage.setItem("authToken", res.data.authToken);
         setLoggedIn(true); setErrorMessage("");
+        history.push("/users");
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
