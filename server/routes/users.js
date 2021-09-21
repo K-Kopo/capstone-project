@@ -73,8 +73,8 @@ router.route("/signup").post((req, res) => {
 });
 
 router.route("/login").post((req, res) => {
-    const {username, password} = req.body
-
+    const { username, password } = req.body
+console.log(req.body);
     user 
     .where({username})
     .fetch()
@@ -82,7 +82,7 @@ router.route("/login").post((req, res) => {
         bcrypt.compare(password, user.attributes.password, function(_, success) {
             if (success) {
                 const token = signJWTToken(user);
-                return res.status(200).json({authToken: token});
+                res.status(200).json({authToken: token}); 
             } else {
                 return res.status(403).json({message: 'username and password do not jive'});
             }

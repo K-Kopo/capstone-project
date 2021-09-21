@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./SignUpPage.scss";
 import axios from "axios";
 
-const SignUpPage = () => {
+const SignUpPage = ({history}) => {
   const [values, setValues] = useState({
     name: "",
     username: "",
@@ -58,6 +58,7 @@ const SignUpPage = () => {
         console.log("token: ", res.data.authToken);
         sessionStorage.setItem("authToken", res.data.authToken);
         setLoggedIn(true);
+        history.push("/login")
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
@@ -104,7 +105,7 @@ const SignUpPage = () => {
         <input
           onChange={handlePasswordChange}
           value={values.password}
-          type="text"
+          type="password"
           placeholder="enter your password"
         />
         <button type="submit">SUBMIT</button>
