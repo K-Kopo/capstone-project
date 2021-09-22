@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./SignUpPage.scss";
 import axios from "axios";
 
-const SignUpPage = ({history}) => {
+const SignUpPage = ({ history }) => {
   const [values, setValues] = useState({
     name: "",
     username: "",
@@ -47,21 +47,16 @@ const SignUpPage = ({history}) => {
     console.log(event.target);
     axios
       .post("http://localhost:5000/users/signup", {
-        // name: event.target.value.name,
-        // username: event.target.value.username,
-        // role: event.target.value.role,
-        // email: event.target.value.email,
-        // phone: event.target.value.phone,
         ...values,
       })
       .then((res) => {
         console.log("token: ", res.data.authToken);
         sessionStorage.setItem("authToken", res.data.authToken);
         setLoggedIn(true);
-        history.push("/login")
+        history.push("/login");
       })
       .catch((error) => {
-        setErrorMessage(error.response.data.message);
+        setErrorMessage(error.data.message);
       });
   };
   return (

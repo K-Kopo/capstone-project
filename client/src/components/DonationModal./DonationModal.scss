@@ -14,10 +14,17 @@ body {
 .donation-modal {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(219, 212, 212, 0.5);
+    background-color: rgba(219, 212, 212, 0.95);
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    top: 0;
+    &__form {
+        width: 50%;
+        height: 50%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 20px;
+    }
 
 }

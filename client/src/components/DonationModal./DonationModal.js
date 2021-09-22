@@ -37,10 +37,10 @@ const DonationModal = ({ userData, closeModal, history }) => {
   };
 
   return (
-    <div className="donation_modal">
-      <form className="donation_modal__form" onSubmit={handleOnSubmit}>
+    <div className="donation-modal">
+      <form className="donation-modal__form" onSubmit={handleOnSubmit}>
         <select
-          className="donation_modal__form--select"
+          className="donation-modal__form--select"
           onChange={handleTypeChange}
           value={values.type}
           htmlFor=""
@@ -49,40 +49,40 @@ const DonationModal = ({ userData, closeModal, history }) => {
           <option value="prepared">Prepared Food</option>
           <option value="bulk">Bulk Ingredient</option>
         </select>
-        <label className="donation_modal__form--label" htmlFor="">
+        <label className="donation-modal__form--label" htmlFor="">
           Description of item
         </label>
         <textarea
-          className="donation_modal__form--textarea"
+          className="donation-modal__form--textarea"
           onChange={handleDescriptionChange}
           value={values.description}
           placeholder="add description of item"
         ></textarea>
-        <label className="donation_modal__form--label" htmlFor="">
+        <label className="donation-modal__form--label" htmlFor="">
           Amount
         </label>
         <input
-          className="donation_modal__form--input"
+          className="donation-modal__form--input"
           onChange={handleAmountChange}
           type="text"
           value={values.amount}
           placeholder="enter amount"
         />
-        <label className="donation_modal__form--label" htmlFor="">
+        <label className="donation-modal__form--label" htmlFor="">
           Expires On
         </label>
         <input
-          className="donation_modal__form--input"
+          className="donation-modal__form--input"
           onChange={handleExpiresChange}
           type="text"
           value={values.expires}
           placeholder="enter expiration date"
         />
-        <button className="donation_modal__form--button" type="submit">
+        <button className="donation-modal__form--button" type="submit">
           SUBMIT
         </button>
         <button
-          className="donation_modal__form--cancel"
+          className="donation-modal__form--cancel"
           onClick={() => closeModal(false)}
         >
           CANCEL

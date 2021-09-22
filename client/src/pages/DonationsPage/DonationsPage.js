@@ -17,23 +17,29 @@ useEffect(()=> {
     })
     .catch((error)=> console.log(error));
 }, [])
+const handleOnSubmit = (event) => {
+    event.preventDefault();
+    axios.put("http://localhost:5000/donations", {
+        user_id: event.target.value
+    })
+}
 console.log(donationsData);
     return loggedIn ? (
         <div>
             Donations table!
             {donationsData.map((donation)=> {
                 return (
-                    <ul key={donation.id}>
-                    <li>{donation.type}</li>
-                    <li>{donation.description}</li>
-                    <li>{donation.amount}</li>
-                    <li>{donation.expires}</li>
-                    <button>add to list</button>
-                    </ul>
+                    <form key={donation.id}>
+                    <p value={donation.type}>{donation.type}</p>
+                    <p value={donation.description}>{donation.description}</p>
+                    <p value={donation.amount}>{donation.amount}</p>
+                    <p value={donation.expires}>{donation.expires}</p>
+                    <button type="submit">add to my list</button>
+                    </form>
                 )
             })}
         </div>
-    ) : <p>must be logged in in to see donations list</p>
+    ) : <p>must be logged in to see donations pst</p>
 }
 
 export default DonationsPage;

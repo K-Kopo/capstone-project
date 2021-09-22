@@ -1,50 +1,52 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DonationModal from "../../components/DonationModal./DonationModal";
+import "../../components/DonationModal./DonationModal.scss"
+
 
 const UserPage = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userDonations, setUserDonations] = useState([]);
   const [openModal, setOpenModal] = useState(false);
 
-  const [values, setValues] = useState({
-    type: "",
-    description: "",
-    amount: "",
-    expires: "",
-  });
-
-  const handleTypeChange = (event) => {
-    setValues({ ...values, type: event.target.value });
-  };
-  const handleDescriptionChange = (event) => {
-    setValues({ ...values, description: event.target.value });
-  };
-  const handleAmountChange = (event) => {
-    setValues({ ...values, amount: event.target.value });
-  };
-  const handleExpiresChange = (event) => {
-    setValues({ ...values, expires: event.target.value });
-  };
   function handleAuthFail() {
     sessionStorage.removeItem("authToken");
     setLoggedIn(false);
   }
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
+  // const [values, setValues] = useState({
+  //   type: "",
+  //   description: "",
+  //   amount: "",
+  //   expires: "",
+  // });
+
+  // const handleTypeChange = (event) => {
+  //   setValues({ ...values, type: event.target.value });
+  // };
+  // const handleDescriptionChange = (event) => {
+  //   setValues({ ...values, description: event.target.value });
+  // };
+  // const handleAmountChange = (event) => {
+  //   setValues({ ...values, amount: event.target.value });
+  // };
+  // const handleExpiresChange = (event) => {
+  //   setValues({ ...values, expires: event.target.value });
+  // };
+  // const handleOnSubmit = (event) => {
+  //   event.preventDefault();
   
-    axios
-      .post("http://localhost:5000/donations", {
-        user_id: userData.id,
-        ...values,
-      })
-      .then((response) => {
-        // res.status(200).json(res.data);
-      });
-  };
+  //   axios
+  //     .post("http://localhost:5000/donations", {
+  //       user_id: userData.id,
+  //       ...values,
+  //     })
+  //     .then((response) => {
+  //       // res.status(200).json(res.data);
+  //     });
+  // };
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
 
@@ -70,7 +72,6 @@ const UserPage = () => {
   const donations = userDonations.filter(
     (donation) => donation.user_id === userData.id
   );
-  console.log(donations);
 
   return isLoading && !loggedIn ? (
     <h1>please log in!</h1>

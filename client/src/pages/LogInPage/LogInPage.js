@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const LogInPage = ({history}) => {
+  const [userData, setUserData] = useState([]);
+
   const [values, setValues] = useState({
     username: "",
     password: "",
@@ -26,18 +28,27 @@ const LogInPage = ({history}) => {
       .then((res) => {
         sessionStorage.setItem("authToken", res.data.authToken);
         setLoggedIn(true); setErrorMessage("");
-        history.push("/users");
+        // history.push("/users/");
       })
       .catch((error) => {
-        setErrorMessage(error.response.data.message);
+        setErrorMessage(error);
       });
-  };
+    
+      const userLog = userData.find((user) => user.username === values.username )
+      console.log(userLog);
+      userLog.role === 'restaurant' ? history.push(`/users/${userLog.id}`) : history.push(`/donations/${userLog.id}`)
+      
+    };
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
 
     if (authToken) {
       setLoggedIn(true);
     }
+    axios.get("http://localhost:5000/users") 
+    .then((response)=> 
+    setUserData(response.data))
+    .catch((error)=> console.log(error))
   }, []);
   return (
     <div className="login">
