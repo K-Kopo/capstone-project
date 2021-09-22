@@ -6,7 +6,8 @@ const HomePage = () => {
     return (
         <section className="homepage">
             This is the home you've always dreamed of!
-            <Link to="/signup" ><button>Sign Up / Log In</button></Link>
+            <Link to="/signup" ><button>Sign Up</button></Link>
+            <Link to="/login" ><button>Log In</button></Link>
         </section>
     );
 };

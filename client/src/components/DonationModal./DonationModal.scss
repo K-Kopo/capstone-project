@@ -1,0 +1,23 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.donation-modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(219, 212, 212, 0.5);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

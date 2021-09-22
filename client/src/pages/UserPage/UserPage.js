@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import DonationModal from "../../components/DonationModal./DonationModal";
 
 const UserPage = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -7,6 +8,7 @@ const UserPage = () => {
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userDonations, setUserDonations] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
   const [values, setValues] = useState({
     type: "",
@@ -45,7 +47,7 @@ const UserPage = () => {
   };
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
-    
+
     axios
       .get("http://localhost:5000/users/profile", {
         headers: {
@@ -70,8 +72,8 @@ const UserPage = () => {
   );
   console.log(donations);
 
-  return isLoading ? (
-    <h1>PATIENCE IS A VIRTUE...</h1>
+  return isLoading && !loggedIn ? (
+    <h1>please log in!</h1>
   ) : (
     <div>
       <h2>Hello again, {userData.name}</h2>
@@ -85,7 +87,9 @@ const UserPage = () => {
           </ul>
         );
       })}
-      <form onSubmit={handleOnSubmit}>
+      <button onClick={()=>setOpenModal(true)}>Add donation</button>
+      {openModal && <DonationModal closeModal={setOpenModal} userData={userData} />}
+      {/* <form onSubmit={handleOnSubmit}>
         <select onChange={handleTypeChange} value={values.type} htmlFor="">
           <option value="">Select type of donation</option>
           <option value="prepared">Prepared</option>
@@ -112,7 +116,7 @@ const UserPage = () => {
           placeholder="enter expiration date"
         />
         <button type="submit">SUBMIT</button>
-      </form>
+      </form> */}
     </div>
   );
 };
