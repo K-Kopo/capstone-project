@@ -83,6 +83,15 @@ const UserPage = () => {
   ) : (
     <div>
       <h2>Hello again, {userData.name}</h2>
+      {donations.map(donation => {
+          return (
+          <ul key={donation.id}>
+          <div>{donation.type}</div>
+          <div>{donation.description}</div>
+          <div>{donation.amount}</div>
+          <div>{donation.expires}</div>
+          </ul>
+      )})}
       <form onSubmit={handleOnSubmit}>
         <select onChange={handleTypeChange} value={values.type} htmlFor="">
           <option value="">Select type of donation</option>
