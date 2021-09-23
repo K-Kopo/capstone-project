@@ -1,27 +1,32 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+  // color: orangered;
+  &__navlist {
     display: flex;
-    justify-content: space-between;
-    background-color: cornflowerblue;
-    // color: orangered;
-    &__navlist {
-        display: flex;
-        flex-direction: row;
-        
-        &--link {
-           list-style: none;
-           
-        }
+    flex-direction: row;
+
+    &--link {
+      list-style: none;
+      margin-right: 1rem;
+      
     }
+  }
+  &__home {
+    margin: 1rem;
+  }
 }
 a {
-    text-decoration: none;
-    &:visited {
-        color: red;
-    }
-    &:link {
-        color: yellow;
-    }
-    &:hover {
-        color:yellowgreen;
-    }
+  text-decoration: none;
+  &:visited {
+    color: red;
+  }
+
+&:active {
+//   box-shadow: 2px 2px 5px white, -1px -1px 5px #64b5f6;
+}
+&:hover {
+//   box-shadow: 2px 2px 5px white, -1px -1px 5px #919a76;
+}
 }

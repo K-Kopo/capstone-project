@@ -35,11 +35,11 @@ const LogInPage = ({history}) => {
       });
     
       const userLog = userData.find((user) => user.username === values.username )
-      console.log(userLog);
       userLog.role === 'restaurant' ? history.push(`/users/${userLog.id}`) : history.push(`/donations/${userLog.id}`)
       
     };
   useEffect(() => {
+    let isSubscribed = true;
     const authToken = sessionStorage.getItem("authToken");
 
     if (authToken) {
@@ -49,6 +49,7 @@ const LogInPage = ({history}) => {
     .then((response)=> 
     setUserData(response.data))
     .catch((error)=> console.log(error))
+    return ()=>(isSubscribed = false)
   }, []);
   return (
     <div className="login">

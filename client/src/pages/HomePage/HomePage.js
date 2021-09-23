@@ -5,9 +5,10 @@ import {Link} from 'react-router-dom';
 const HomePage = () => {
     return (
         <section className="homepage">
-            This is the home you've always dreamed of!
-            <Link to="/signup" ><button>Sign Up</button></Link>
-            <Link to="/login" ><button>Log In</button></Link>
+            <div>
+            <Link to="/signup" ><button className="homepage__signup-btn">Sign Up</button></Link>
+            <Link to="/login" ><button className="homepage__login-btn">Log In</button></Link>
+            </div>
         </section>
     );
 };
