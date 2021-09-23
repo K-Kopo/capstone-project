@@ -5,21 +5,21 @@
   font-family: "Oswald";
   display: flex;
   justify-content: space-between;
-
-
-
-  background: rgb(56,102,65, .5);
+  align-items: center;
+  background-color: whitesmoke;
+  height: 6rem;
+  font-size: 1.5rem;
   &__navlist {
     display: flex;
     flex-direction: row;
 
     &--link {
       list-style: none;
-      color: whitesmoke;
-      border-left: 2px solid whitesmoke;
-      padding: 0rem .5rem 0rem .5rem;
+      color: rgb(56, 102, 65, 0.75);
+      border-left: 2px solid rgb(56, 102, 65, 0.75);
+      padding: 0rem 0.5rem 0rem 0.5rem;
       text-decoration: none;
-     
+      height: 2.5rem;
     }
   }
   &__home {
@@ -29,13 +29,12 @@
 a {
   text-decoration: none;
   &:visited {
-    color: whitesmoke;
+    color: rgb(56, 102, 65, 0.75);
   }
   &:hover {
     color: #bc4749;
   }
-
-  }
+}
 
 // &:active {
 // //   box-shadow: 2px 2px 5px white, -1px -1px 5px #64b5f6;

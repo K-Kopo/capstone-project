@@ -9,21 +9,18 @@ import LogInPage from "./pages/LogInPage/LogInPage";
 
 function App() {
   return (
-    <Router >
+    <Router>
       <Header />
-      
+
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/users" component={UserPage}/>
-        <Route path="/donations/:id" component={DonationsPage}/>
-        <Route path="/users/:id" component={UserPage}/>
+        <Route path="/users" component={UserPage} />
+        <Route path="/donations/:id" component={DonationsPage} />
+        <Route path="/users/:id" component={UserPage} />
         <Route path="/signup" component={SignUpPage} />
         <Route path="/login" component={LogInPage} />
       </Switch>
-      
-      
-      'Welcome to the Capstone, sucka!'
-      </Router>
+    </Router>
   );
 }
 

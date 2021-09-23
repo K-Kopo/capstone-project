@@ -1,0 +1,9 @@
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+
+.user__loginpage {
+    @include resets;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

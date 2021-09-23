@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import DonationModal from "../../components/DonationModal./DonationModal";
 import "../../components/DonationModal./DonationModal.scss";
+import "./UserPage.scss";
 
 const UserPage = ({ history }) => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -49,7 +51,12 @@ const UserPage = ({ history }) => {
     history.push("/");
   };
   return isLoading && !loggedIn ? (
-    <h1>please log in!</h1>
+    <div className="user__loginpage">
+      <h1>please log in!</h1>
+     <Link to="/login">
+          <button className="homepage__login-btn">Log In</button>
+        </Link>
+    </div>
   ) : (
     <div>
       <h2>Hello again, {userData.name}</h2>

@@ -2,34 +2,50 @@
 @import "../../Styles/partials/mixins";
 
 .homepage {
-    background: rgb(56,102,65, .75);
-    height: 100vh;
+  font-family: "Oswald";
+  background: rgb(56, 102, 65, 0.75);
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  &__title {
+    font-size: 4rem;
+    margin-left: 4rem;
+    &--subtitle {
+      font-size: 2rem;
+    }
+  }
+  &__signup-btn {
+    @include button-style;
+    margin: 2rem;
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);
+    &:hover {
+      border-color: #bc4749;
+      color: #bc4749;
+    }
+  }
+  &__login-btn {
+    @include button-style;
+    margin: 2rem;
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);
+    &:hover {
+      border-color: #bc4749;
+      color: #bc4749;
+    }
+  }
+  &__content {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    &__signup-btn {
-      @include button-style;
-      margin: 2rem;
-      &:hover {
-        border-color: #bc4749;
-        color: #bc4749;
-        
-      }
+    margin-top: 6rem;
+    &--carousel {
+      width: 300px;
+      height: 300px;
+      box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);
     }
-    &__login-btn {
-      @include button-style;
-      margin: 2rem;
-      &:hover {
-        border-color: #bc4749;
-        color: #bc4749;
-        
-
-
-      }
-    }
+  }
 }
-.carousel {
-    width: 40%;
-    height: 40%;
+.white-highlight {
+  color: white;
 }

@@ -22,21 +22,21 @@ export default class Fade extends Component {
     };
     return (
       <div>
-        <h2>Fade</h2>
+        
         <Slider {...settings}>
-          <div>
+          <div className="carousel-box">
             <img className="carousel-photos" src={photo1} />
           </div>
-          <div>
+          <div className="carousel-box">
             <img className="carousel-photos" src={photo2} />
           </div>
-          <div>
+          <div className="carousel-box">
             <img className="carousel-photos" src={photo3} />
           </div>
-          <div>
+          <div className="carousel-box">
             <img className="carousel-photos" src={photo4} />
           </div>
-          <div>
+          <div className="carousel-box">
             <img className="carousel-photos" src={photo5} />
           </div>
         </Slider>
