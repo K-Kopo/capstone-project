@@ -74,7 +74,6 @@ router.route("/signup").post((req, res) => {
 
 router.route("/login").post((req, res) => {
     const { username, password } = req.body
-console.log(req.body);
     user 
     .where({username})
     .fetch()
@@ -83,6 +82,7 @@ console.log(req.body);
             if (success) {
                 const token = signJWTToken(user);
                 res.status(200).json({authToken: token}); 
+                
             } else {
                 return res.status(403).json({message: 'username and password do not jive'});
             }

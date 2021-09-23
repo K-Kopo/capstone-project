@@ -44,10 +44,13 @@ const DonationsPage = ({ match }) => {
   }, []);
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target);
-    const id = match.params.id
+    const id = event.target.id.value
     axios.put(`http://localhost:5000/donations/${id}`, {
+      type: event.target.type.value,
       user_id: match.params.id,
+      description: event.target.description.value,
+      amount: event.target.amount.value,
+      expires: event.target.expires.value
     }).then((response)=> console.log(response))
     .catch((error )=> console.log(error));
   };
@@ -62,10 +65,11 @@ const DonationsPage = ({ match }) => {
       {donationsData.map((donation) => {
         return (
           <form onSubmit={handleOnSubmit} key={donation.id}>
-            <input name="type" value={donation.type}>{donation.type}</input>
-            <input name="description" value={donation.description}>{donation.description}</input>
-            <input name="amount" value={donation.amount}>{donation.amount}</input>
-            <input name="expires" value={donation.expires}>{donation.expires}</input>
+            <input name="id" value={donation.id}></input>
+            <input name="type" value={donation.type} ></input>
+            <input name="description" value={donation.description}></input>
+            <input name="amount" value={donation.amount}></input>
+            <input name="expires" value={donation.expires}></input>
             <button type="submit">add to my list</button>
           </form>
         );

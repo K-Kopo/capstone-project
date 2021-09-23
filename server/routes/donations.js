@@ -18,6 +18,7 @@ router
             });
     })
     .put((req, res) => {
+        console.log(req.params.id);
         Donation.where({ id: req.params.id })
             .fetch()
             .then((donation) => {
@@ -94,52 +95,25 @@ router
             });
     });
 
-// // get single inventory by id
-// router
-//     .route("/:id")
-//     .get((req, res) => {
-//         Donation.where({ id: req.params.id })
-//             .fetch({ withRelated: ["user"] })
-//             .then((donation) => {
-//                 res.status(200).json({ donation });
-//             })
-//             .catch(() => {
-//                 res.status(400).json({ message: "Error, can't get donation" });
-//             });
-//     })
-//     .put((req, res) => {
-//         Donation.where({ id: req.params.id })
-//             .fetch()
-//             .then((donation) => {
-//                 donation
-//                     .save({
-                        
-//                         description: req.body.description,
-//                         user_id: req.body.user_id,
-//                         amount: req.body.amount,
-//                         expires: req.body.expires,
-//                         type: req.body.type
-//                     })
-//                     .then((updatedDonation) => {
-//                         res.status(200).json(updatedDonation);
-//                     })
-//                     .catch(() => {
-//                         res.status(400).json({ message: "Error, can't save donation" });
-//                     });
-//             });
-//     })
-//     .delete((req, res) => {
-//         Donation.where("id", req.params.id)
-//             .destroy()
-//             .then((deletedDonation) => {
-//                 console.log(deletedDonation);
-
-//                 res.status(200).json({
-//                     message: `Donation deleted successfully`,
-//                 });
-//             })
-//             .catch(() => res.status(400).json({ message: "Error, can't delete donation" }));
-//     });
+    router.route('/profile').get((req, res) => {
+        if (!req.headers.authorization) return res.status(401).json({ message: 'This route requires authentication token' });
+      
+        const authToken = req.headers.authorization.split(' ')[1];
+      
+        jwt.verify(authToken, JWT_SECRET, (err, decoded) => {
+          if (err) return res.status(401).json({ message: 'The token is invalid' });
+      
+          user
+            .where({ id: decoded.id, username: decoded.sub })
+            .fetch()
+            .then(user => {
+              res.status(200).json(user);
+            })
+            .catch(() => {
+              res.status(400).json({ message: "Can't fetch the user profile "});
+            })
+        })
+      });
 
 
 module.exports = router;
