@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DonationModal from "../../components/DonationModal./DonationModal";
-import "../../components/DonationModal./DonationModal.scss"
+import "../../components/DonationModal./DonationModal.scss";
 
-
-const UserPage = () => {
+const UserPage = ({ history }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   // const [errorMessage, setErrorMessage] = useState("");
   const [userData, setUserData] = useState([]);
@@ -16,7 +15,7 @@ const UserPage = () => {
     sessionStorage.removeItem("authToken");
     setLoggedIn(false);
   }
-  
+
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
     authToken ? setLoggedIn(true) : setLoggedIn(false);
@@ -39,13 +38,17 @@ const UserPage = () => {
         setUserDonations(response.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [loggedIn]);
   const donations = userDonations.filter(
     (donation) => donation.user_id === userData.id
-    );
-    console.log(donations);
-
-  return !loggedIn && isLoading ? (
+  );
+  console.log(donations);
+  const logOut = () => {
+    sessionStorage.removeItem("authToken");
+    setLoggedIn(false);
+    history.push("/");
+  };
+  return isLoading && !loggedIn ? (
     <h1>please log in!</h1>
   ) : (
     <div>
@@ -60,9 +63,11 @@ const UserPage = () => {
           </ul>
         );
       })}
-      <button onClick={()=>setOpenModal(true)}>Add donation</button>
-      {openModal && <DonationModal closeModal={setOpenModal} userData={userData} />}
-
+      <button onClick={() => setOpenModal(true)}>Add donation</button>
+      {openModal && (
+        <DonationModal closeModal={setOpenModal} userData={userData} />
+      )}
+      <button onClick={() => logOut()}>Logout</button>
     </div>
   );
 };

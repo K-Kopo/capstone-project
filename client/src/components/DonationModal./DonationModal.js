@@ -32,7 +32,7 @@ const DonationModal = ({ userData, closeModal, history }) => {
       })
       .then((response) => {
         // res.status(200).json(res.data);
-        history.push("/");
+        window.location="http://localhost:3000/users";
       });
   };
 

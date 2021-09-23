@@ -1,27 +1,41 @@
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+
 .header {
+  font-family: "Oswald";
   display: flex;
   justify-content: space-between;
-  background-color: rgb(255, 255, 255);
-  // color: orangered;
+
+
+
+  background: rgb(56,102,65, .5);
   &__navlist {
     display: flex;
     flex-direction: row;
 
     &--link {
       list-style: none;
-      margin-right: 1rem;
-      
+      color: whitesmoke;
+      border-left: 2px solid whitesmoke;
+      padding: 0rem .5rem 0rem .5rem;
+      text-decoration: none;
+     
     }
   }
   &__home {
     margin: 1rem;
   }
 }
-// a {
-//   text-decoration: none;
-//   &:visited {
-//     color: red;
-//   }
+a {
+  text-decoration: none;
+  &:visited {
+    color: whitesmoke;
+  }
+  &:hover {
+    color: #bc4749;
+  }
+
+  }
 
 // &:active {
 // //   box-shadow: 2px 2px 5px white, -1px -1px 5px #64b5f6;

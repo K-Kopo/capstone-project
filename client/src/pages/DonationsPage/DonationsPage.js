@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import "./DonationsPage.scss";
 
-const DonationsPage = ({ match }) => {
+const DonationsPage = ({ match, history }) => {
   const [donationsData, setDonationsData] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
@@ -23,17 +24,17 @@ const DonationsPage = ({ match }) => {
         },
       })
       .then((res) => {
-        // setUserData(res.data);
+        setUserData(res.data);
         setIsLoading(false);
       })
-      .catch((error) => error);
+      .catch((error) => console.log(error))
 
-    axios
-      .get("http://localhost:5000/users")
-      .then((response) => {
-        setUserData(response.data);
-      })
-      .catch((error) => console.log(error));
+    // axios
+    //   .get("http://localhost:5000/users")
+    //   .then((response) => {
+    //     setUserData(response.data);
+    //   })
+    //   .catch((error) => console.log(error));
 
     axios
       .get("http://localhost:5000/donations")
@@ -54,9 +55,13 @@ const DonationsPage = ({ match }) => {
     }).then((response)=> console.log(response))
     .catch((error )=> console.log(error));
   };
-
-  const userBank = userData.find((user) => user.id === match.params.id);
-    console.log(userBank);
+  const logOut = () => {
+    sessionStorage.removeItem("authToken");
+    setLoggedIn(false);
+    history.push("/");
+  };
+  // const userBank = userData.find((user) => user.id === match.params.id);
+    console.log(userData);
   return isLoading && !loggedIn ? (
     <h1>please log in!</h1>
   ) : (
@@ -74,6 +79,8 @@ const DonationsPage = ({ match }) => {
           </form>
         );
       })}
+            <button onClick={() => logOut()}>Logout</button>
+
     </div>
   );
 };

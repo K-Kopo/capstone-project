@@ -1,0 +1,29 @@
+@import "../../Styles/partials/typography";
+
+
+@mixin resets {
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+    
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  }
+
+  @mixin button-style {
+    font-family: 'Oswald';
+    height: 3rem;
+    width: 8rem;
+    background-color: whitesmoke; 
+    border: 1px solid rgb(56,102,65);
+   
+    border-radius: 10px;
+    
+    color: rgb(56,102,65);
+  }

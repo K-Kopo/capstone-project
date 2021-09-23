@@ -1,23 +1,35 @@
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+
 .homepage {
-    background: rgb(100,121,38);
-    background: linear-gradient(61deg, rgba(100,121,38,1) 28%, rgba(145,154,118,1) 73%);
+    background: rgb(56,102,65, .75);
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     &__signup-btn {
-        height: 3rem;
-        width: 5rem;
-        border: none;
-        border-radius: 15px;
-        margin: 2rem;
+      @include button-style;
+      margin: 2rem;
+      &:hover {
+        border-color: #bc4749;
+        color: #bc4749;
+        
+      }
     }
     &__login-btn {
-        height: 3rem;
-        width: 5rem;
-        border: none;
-        border-radius: 15px;
+      @include button-style;
+      margin: 2rem;
+      &:hover {
+        border-color: #bc4749;
+        color: #bc4749;
+        
 
+
+      }
     }
+}
+.carousel {
+    width: 40%;
+    height: 40%;
 }
