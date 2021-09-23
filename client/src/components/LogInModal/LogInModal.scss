@@ -1,0 +1,71 @@
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login{
+    width: 50vw;
+    height: 50vh;
+    // background-color: rgba(219, 212, 212, 0.95);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 25%;
+    right: 25%;
+    &__form {
+        width: 50%;
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 20px;
+        border: 1.5px solid #bc4749;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &--label{
+            font-size: 1.5rem;
+            color: #386641;
+            margin: 1rem;
+        }
+        &--input {
+            background-color: whitesmoke;
+            border-radius: 10px;
+            border:1px solid #386641;
+            height: 2rem;
+            padding: .5rem;
+        }
+        &--buttonbox {
+            display: flex;
+            margin: 1rem;
+            &-btn {
+                background-color: #386641;
+                color: whitesmoke;
+                border: none;
+                border-radius: 5px;
+                height: 1.5rem;
+                margin: 1rem;
+            }
+            &-cancelbtn {
+                background-color: #bc4749;
+                color: whitesmoke;
+                border: none;
+
+                border-radius: 5px; 
+                height: 1.5rem;
+                margin: 1rem;
+
+
+            }
+        }
+    }
+
+}

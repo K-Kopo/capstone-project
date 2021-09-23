@@ -2,10 +2,11 @@ import React from "react";
 import "./HomePage.scss";
 import { Link } from "react-router-dom";
 import PhotoCarousel from "../../components/PhotoCarousel/PhotoCarousel"
+import LogInButton from "../../components/LogInButton/LogInButton";
 
 
 
-const HomePage = () => {
+const HomePage = ({history}) => {
   return (
     <section className="homepage">
       <div className="homepage__title">
@@ -20,9 +21,7 @@ const HomePage = () => {
         <Link to="/signup">
           <button className="homepage__signup-btn">Sign Up</button>
         </Link>
-        <Link to="/login">
-          <button className="homepage__login-btn">Log In</button>
-        </Link>
+        <LogInButton history={history}/>
       </article>
       </div>
     </section>

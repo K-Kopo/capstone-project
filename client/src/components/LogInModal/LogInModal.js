@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import "./LogInModal.scss";
 
-const LogInPage = ({ history }) => {
+const LogInModal = ({ history, closeModal }) => {
   const [userData, setUserData] = useState([]);
 
   const [values, setValues] = useState({
@@ -36,6 +37,7 @@ const LogInPage = ({ history }) => {
       });
 
     const userLog = userData.find((user) => user.username === values.username);
+    console.log(userLog);
     userLog.role === "restaurant"
       ? history.push(`/users/${userLog.id}`)
       : history.push(`/donations/${userLog.id}`);
@@ -76,10 +78,13 @@ const LogInPage = ({ history }) => {
           value={values.password}
           placeholder="enter your password"
         />
-        <button type="submit">SUBMIT</button>
+        <div className="login__form--buttonbox">
+          <button className="login__form--buttonbox-btn" type="submit">SUBMIT</button>
+          <button className="login__form--buttonbox-cancelbtn"onClick={() => closeModal(false)}>CANCEL</button>
+        </div>
       </form>
     </div>
   );
 };
 
-export default LogInPage;
+export default LogInModal;
