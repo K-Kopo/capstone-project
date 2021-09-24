@@ -7,7 +7,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  background-color: whitesmoke;
+  background-color: white;
   height: 6rem;
   font-size: 1.5rem;
   // position: fixed;
@@ -33,7 +33,7 @@
 a {
   text-decoration: none;
   &:visited {
-    color: rgb(56, 102, 65, 0.75);
+    color: #A29F15;
   }
   &:hover {
     color: #bc4749;

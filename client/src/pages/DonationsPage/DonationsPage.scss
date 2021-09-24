@@ -1,0 +1,24 @@
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+@import "../../Styles/partials/variables";
+
+// @include resets
+
+.donations-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    &__hidden {
+        display: none;
+    }
+    &__input {
+       border: none; 
+       font-family: "Oswald";
+       font-size: 1.25rem;
+       margin-bottom: 1rem;
+       width: auto;
+    }
+    &__btn {
+        @include button-style;
+    }
+}
