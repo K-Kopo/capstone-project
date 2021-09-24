@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./DonationModal.scss";
 
@@ -10,7 +10,9 @@ const DonationModal = ({ userData, closeModal }) => {
     amount: "",
     expires: "",
   });
-  const history = useHistory()
+
+  const [submitted, setSubmitted] = useState(false);
+  const history = useHistory();
 
   const handleTypeChange = (event) => {
     setValues({ ...values, type: event.target.value });
@@ -26,6 +28,8 @@ const DonationModal = ({ userData, closeModal }) => {
   };
   const handleOnSubmit = (event) => {
     event.preventDefault();
+    setSubmitted(true);
+
     console.log(event.target);
     axios
       .post("http://localhost:5000/donations", {
@@ -33,10 +37,9 @@ const DonationModal = ({ userData, closeModal }) => {
         ...values,
       })
       .then((response) => {
-        // res.status(200).json(res.data);
         history.push("/");
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -44,7 +47,9 @@ const DonationModal = ({ userData, closeModal }) => {
   return (
     <div className="donation-modal">
       <form className="donation-modal__form" onSubmit={handleOnSubmit}>
-      <h2 className="donation-modal__title">Please fill out the form below</h2>
+        <h2 className="donation-modal__title">
+          Please fill out the form below
+        </h2>
         <select
           className="donation-modal__form--select"
           onChange={handleTypeChange}
@@ -55,6 +60,8 @@ const DonationModal = ({ userData, closeModal }) => {
           <option value="prepared">Prepared Food</option>
           <option value="bulk">Bulk Ingredient</option>
         </select>
+        {submitted && !values.type ? <span className="donation-modal__form--error">Please select a type</span> : null}
+
         <label className="donation-modal__form--label" htmlFor="">
           Description of item
         </label>
@@ -64,6 +71,7 @@ const DonationModal = ({ userData, closeModal }) => {
           value={values.description}
           placeholder="add description of item"
         ></input>
+        {submitted && !values.description ? <span className="donation-modal__form--error">Please enter a description</span> : null}
         <label className="donation-modal__form--label" htmlFor="">
           Amount
         </label>
@@ -74,6 +82,7 @@ const DonationModal = ({ userData, closeModal }) => {
           value={values.amount}
           placeholder="enter amount"
         />
+       {submitted && !values.amount ? <span className="donation-modal__form--error">Please enter an amount</span> : null }
         <label className="donation-modal__form--label" htmlFor="">
           Expires On
         </label>
@@ -84,16 +93,17 @@ const DonationModal = ({ userData, closeModal }) => {
           value={values.expires}
           placeholder="enter expiration date"
         />
+   {submitted && !values.expires ? <span className="donation-modal__form--error">Please enter an expiration date</span> : null }
         <div className="donation-modal__form--btnbox">
-        <button className="donation-modal__form--button" type="submit">
-          SUBMIT
-        </button>
-        <button
-          className="donation-modal__form--cancel"
-          onClick={() => closeModal(false)}
-        >
-          CANCEL
-        </button>
+          <button className="donation-modal__form--button" type="submit">
+            SUBMIT
+          </button>
+          <button
+            className="donation-modal__form--cancel"
+            onClick={() => closeModal(false)}
+          >
+            CANCEL
+          </button>
         </div>
       </form>
     </div>
