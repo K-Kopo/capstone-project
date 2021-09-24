@@ -1,14 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Redirect, useHistory } from "react-router";
 import "./LogInModal.scss";
 
-const LogInModal = ({ history, closeModal }) => {
+const LogInModal = ({ closeModal }) => {
   const [userData, setUserData] = useState([]);
 
   const [values, setValues] = useState({
     username: "",
     password: "",
   });
+  const history = useHistory();
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,14 +32,14 @@ const LogInModal = ({ history, closeModal }) => {
         sessionStorage.setItem("authToken", res.data.authToken);
         setLoggedIn(true);
         setErrorMessage("");
-        // history.push("/users/");
+        history.push("/users/");
       })
       .catch((error) => {
         setErrorMessage(error);
       });
 
     const userLog = userData.find((user) => user.username === values.username);
-    console.log(userLog);
+    console.log(userLog.id);
     userLog.role === "restaurant"
       ? history.push(`/users/${userLog.id}`)
       : history.push(`/donations/${userLog.id}`);
