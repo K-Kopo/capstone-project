@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./DonationsPage.scss";
+import LogInButton from "../../components/LogInButton/LogInButton";
 
 const DonationsPage = ({ match, history }) => {
   const [donationsData, setDonationsData] = useState([]);
@@ -60,14 +61,19 @@ const DonationsPage = ({ match, history }) => {
     setLoggedIn(false);
     history.push("/");
   };
-  // const userBank = userData.find((user) => user.id === match.params.id);
-    console.log(userData);
-  return isLoading && !loggedIn ? (
+  if (!loggedIn)
+  return   (
+    <div className="user__loginpage">
     <h1>please log in!</h1>
-  ) : (
+    <LogInButton />
+  </div>
+  );
+  console.log(userData);
+  const filteredDonations = donationsData.filter(donation => donation.user_id !== userData.id)
+  return (
     <div>
 
-      {donationsData.map((donation) => {
+      {filteredDonations.map((donation) => {
         return (
           <form className="donations-form" onSubmit={handleOnSubmit} key={donation.id}>
             <input className="donations-form__hidden" name="id" value={donation.id}></input>
@@ -82,7 +88,7 @@ const DonationsPage = ({ match, history }) => {
             <button className="donations-form__btn" onClick={() => logOut()}>Logout</button>
 
     </div>
-  );
+  )
 };
 
 export default DonationsPage;

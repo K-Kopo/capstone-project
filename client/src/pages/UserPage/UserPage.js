@@ -128,7 +128,7 @@ const UserPage = ({ history }) => {
           )}
           <button
             className="donation-box__logoutbtn"
-            onClick={() => this.logOut()}
+            onClick={() => logOut()}
           >
             Logout
           </button>
