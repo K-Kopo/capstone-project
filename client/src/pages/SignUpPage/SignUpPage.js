@@ -61,7 +61,7 @@ const SignUpPage = ({ history }) => {
   };
   return (
     <div className="signUp">
-      sign me up, buttercup!
+ <h1 className="signUp__title">Please fill out the form below</h1>
       <form className="signUp__form" onSubmit={handleOnSubmit} action="submit">
         <select
           className="signUp__form--input"

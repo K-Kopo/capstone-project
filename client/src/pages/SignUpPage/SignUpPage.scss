@@ -4,18 +4,22 @@
 .signUp {
   display: flex;
   flex-direction: column;
-  margin: 2rem;
-
-  justify-content: center;
+  height: 100vh;
+  background: rgb(56, 102, 65, 0.75);
+  justify-content: flex-start;
   align-items: center;
+  &__title {
+    font-family: "Oswald";
+    font-size: 2rem;
+  }
   &__form {
     display: flex;
     flex-direction: column;
-    margin: 2rem;
+    margin: 0 2rem;
     width: 50%;
     &--input {
       @include input-style;
-      margin: .5rem 1rem;
+      margin: 0.5rem 1rem;
     }
     &--btnbox {
       display: flex;
@@ -33,7 +37,8 @@
     }
     &--label {
       @include label-style;
-      margin: .5rem 1rem;
+      margin: 0.5rem 1rem;
+      color: whitesmoke;
     }
   }
 }

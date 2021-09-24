@@ -53,28 +53,41 @@ const UserPage = ({ history }) => {
   return isLoading && !loggedIn ? (
     <div className="user__loginpage">
       <h1>please log in!</h1>
-     <Link to="/login">
-          <button className="homepage__login-btn">Log In</button>
-        </Link>
+      <Link to="/login">
+        <button className="homepage__login-btn">Log In</button>
+      </Link>
     </div>
   ) : (
-    <div>
-      <h2>Hello again, {userData.name}</h2>
+    <div className="donation-box">
+      <h2 className="donation-box__title">Hello again, {userData.name}</h2>
+      <h2 className="donation-box__subtitle">Your current donations</h2>
+      <div className="donation-box__tableheads">
+      <thead className="donation-box__tableheads--titles">Type</thead>
+      <thead className="donation-box__tableheads--titles">Description</thead>
+      <thead className="donation-box__tableheads--titles">Amount</thead>
+      <thead className="donation-box__tableheads--titles">Expires On</thead>
+      </div>
       {donations.map((donation) => {
         return (
-          <ul key={donation.id}>
-            <div>{donation.type}</div>
-            <div>{donation.description}</div>
-            <div>{donation.amount}</div>
-            <div>{donation.expires}</div>
-          </ul>
+          <tr className="rest-donation" key={donation.id}>
+            <td className="rest-donation__item">{donation.type}</td>
+            <td className="rest-donation__item">{donation.description}</td>
+            <td className="rest-donation__item">{donation.amount}</td>
+            <td className="rest-donation__item">{donation.expires}</td>
+          </tr>
         );
       })}
-      <button onClick={() => setOpenModal(true)}>Add donation</button>
+      <div className="donation-box__btnbox">
+      <button className="donation-box__btn" onClick={() => setOpenModal(true)}>
+        Add donation
+      </button>
       {openModal && (
         <DonationModal closeModal={setOpenModal} userData={userData} />
       )}
-      <button onClick={() => logOut()}>Logout</button>
+      <button className="donation-box__logoutbtn" onClick={() => logOut()}>
+        Logout
+      </button>
+      </div>
     </div>
   );
 };
