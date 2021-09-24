@@ -1,10 +1,39 @@
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+
 .signUp {
   display: flex;
-flex-direction: column;
-margin: 2rem;
+  flex-direction: column;
+  margin: 2rem;
+
+  justify-content: center;
+  align-items: center;
   &__form {
     display: flex;
     flex-direction: column;
     margin: 2rem;
+    width: 50%;
+    &--input {
+      @include input-style;
+      margin: .5rem 1rem;
+    }
+    &--btnbox {
+      display: flex;
+      justify-content: space-between;
+    }
+    &--btn {
+      @include button-style;
+      margin: 1rem;
+    }
+    &--cancelbtn {
+      @include button-style;
+      margin: 1rem;
+      background-color: #bc4749;
+      color: whitesmoke;
+    }
+    &--label {
+      @include label-style;
+      margin: .5rem 1rem;
+    }
   }
 }

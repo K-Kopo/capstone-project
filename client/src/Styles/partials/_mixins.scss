@@ -1,29 +1,43 @@
 @import "../../Styles/partials/typography";
 
-
 @mixin resets {
-    *,
-    *:before,
-    *:after {
-      box-sizing: inherit;
-    }
-    
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
   }
 
-  @mixin button-style {
-    font-family: 'Oswald';
-    height: 3rem;
-    width: 8rem;
-    background-color: whitesmoke; 
-    border: 1px solid rgb(56,102,65);
-   
-    border-radius: 10px;
-    
-    color: rgb(56,102,65);
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
+}
+
+@mixin button-style {
+  font-family: "Oswald";
+  height: 3rem;
+  width: 8rem;
+  background-color: whitesmoke;
+  border: 1px solid rgb(56, 102, 65);
+
+  border-radius: 10px;
+
+  color: rgb(56, 102, 65);
+}
+
+@mixin input-style {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  border: 1px solid #386641;
+  height: 2rem;
+  padding: 0.5rem;
+}
+
+@mixin label-style {
+  font-family: "Oswald";
+  font-size: 1.5rem;
+  color: #386641;
+  margin: 1rem;
+}

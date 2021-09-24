@@ -63,47 +63,60 @@ const SignUpPage = ({ history }) => {
     <div className="signUp">
       sign me up, buttercup!
       <form className="signUp__form" onSubmit={handleOnSubmit} action="submit">
-        <select onChange={handleRoleChange} value={values.role} name="role">
+        <select
+          className="signUp__form--input"
+          onChange={handleRoleChange}
+          value={values.role}
+          name="role"
+        >
           <option>Please select your role</option>
           <option value="restaurant">Restaurant</option>
           <option value="food bank">Food Bank</option>
         </select>
-        <label>name</label>
+        <label className="signUp__form--label">name</label>
         <input
+          className="signUp__form--input"
           onChange={handleNameChange}
           value={values.name}
           type="text"
           placeholder="enter your name"
         />
-        <label>username</label>
+        <label className="signUp__form--label">username</label>
         <input
+          className="signUp__form--input"
           onChange={handleUsernameChange}
           value={values.username}
           type="text"
           placeholder="enter your username"
         />
-        <label>phone</label>
+        <label className="signUp__form--label">phone</label>
         <input
+          className="signUp__form--input"
           onChange={handlePhoneChange}
           value={values.phone}
           type="text"
           placeholder="enter your phone"
         />
-        <label>email</label>
+        <label className="signUp__form--label">email</label>
         <input
+          className="signUp__form--input"
           onChange={handleEmailChange}
           value={values.email}
           type="text"
           placeholder="enter your email"
         />
-        <label>password</label>
+        <label className="signUp__form--label">password</label>
         <input
+          className="signUp__form--input"
           onChange={handlePasswordChange}
           value={values.password}
           type="password"
           placeholder="enter your password"
         />
-        <button type="submit">SUBMIT</button>
+        <div className="signUp__form--btnbox">
+        <button className="signUp__form--btn" type="submit">SUBMIT</button>
+        <button className="signUp__form--cancelbtn">CANCEL</button>
+        </div>
       </form>
     </div>
   );
