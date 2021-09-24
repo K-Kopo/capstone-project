@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import {useHistory} from "react-router-dom";
 import axios from "axios";
 import "./DonationModal.scss";
 
-const DonationModal = ({ userData, closeModal, history }) => {
+const DonationModal = ({ userData, closeModal }) => {
   const [values, setValues] = useState({
     type: "",
     description: "",
     amount: "",
     expires: "",
   });
+  const history = useHistory()
 
   const handleTypeChange = (event) => {
     setValues({ ...values, type: event.target.value });
@@ -24,7 +26,7 @@ const DonationModal = ({ userData, closeModal, history }) => {
   };
   const handleOnSubmit = (event) => {
     event.preventDefault();
-
+    console.log(event.target);
     axios
       .post("http://localhost:5000/donations", {
         user_id: userData.id,
@@ -32,13 +34,17 @@ const DonationModal = ({ userData, closeModal, history }) => {
       })
       .then((response) => {
         // res.status(200).json(res.data);
-        window.location="http://localhost:3000/users";
+        history.push("/");
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
   return (
     <div className="donation-modal">
       <form className="donation-modal__form" onSubmit={handleOnSubmit}>
+      <h2 className="donation-modal__title">Please fill out the form below</h2>
         <select
           className="donation-modal__form--select"
           onChange={handleTypeChange}
@@ -52,12 +58,12 @@ const DonationModal = ({ userData, closeModal, history }) => {
         <label className="donation-modal__form--label" htmlFor="">
           Description of item
         </label>
-        <textarea
-          className="donation-modal__form--textarea"
+        <input
+          className="donation-modal__form--input"
           onChange={handleDescriptionChange}
           value={values.description}
           placeholder="add description of item"
-        ></textarea>
+        ></input>
         <label className="donation-modal__form--label" htmlFor="">
           Amount
         </label>
@@ -78,6 +84,7 @@ const DonationModal = ({ userData, closeModal, history }) => {
           value={values.expires}
           placeholder="enter expiration date"
         />
+        <div className="donation-modal__form--btnbox">
         <button className="donation-modal__form--button" type="submit">
           SUBMIT
         </button>
@@ -87,6 +94,7 @@ const DonationModal = ({ userData, closeModal, history }) => {
         >
           CANCEL
         </button>
+        </div>
       </form>
     </div>
   );

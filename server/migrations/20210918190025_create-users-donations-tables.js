@@ -24,7 +24,7 @@ exports.up = function(knex) {
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       table.integer('amount').notNullable().defaultTo(0);
-      table.integer('expires').notNullable();
+      table.date('expires').notNullable();
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     });
 };

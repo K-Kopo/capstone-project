@@ -1,3 +1,6 @@
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+@import "../../Styles/partials/variables";
 *,
 *:before,
 *:after {
@@ -12,19 +15,58 @@ body {
 }
 
 .donation-modal {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(219, 212, 212, 0.95);
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    &__form {
-        width: 50%;
-        height: 50%;
-        background-color: rgb(255, 255, 255);
-        border-radius: 20px;
-    }
+  width: 50vw;
+  height: 75vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 15%;
+  right: 25%;
+  border-radius: 10px;
 
+  &__title {
+    font-family: "Oswald";
+    color: $primary-red;
+    font-size: 1.5rem;
+    margin-left: 2rem;
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    &--select {
+      @include input-style;
+      margin: 0 2rem;
+      height: 2rem;
+      padding: 0;
+
+    }
+  
+    &--label {
+      @include label-style;
+      margin: 2rem;
+    }
+    &--input {
+      @include input-style;
+      margin: 0 2rem;
+
+    }
+    &--btnbox {
+      display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+    }
+    &--button {
+      @include button-style;
+    }
+    &--cancel {
+      @include button-style;
+      background-color: $primary-red;
+    }
+  }
 }
