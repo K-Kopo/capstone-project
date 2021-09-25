@@ -77,16 +77,18 @@ class UserPage extends Component {
   }
   // console.log(this.state.userDonations);
   deleteDonation = (event) => {
-    event.preventDefault();
-    console.log(event);
+  
     const id = event.target.id.value
 
     axios.delete(`http://localhost:5000/donations/${id}`,{
       
     })
-    .then((response)=>console.log(response))
+    .then((response)=>{
+      this.setState({
+        shouldRefresh: true})
+      })
     .catch((error)=>console.log(error))
-  }
+  };
   render() {
     const { userDonations, userData, isloading, loggedIn, openModal } =
       this.state;
@@ -110,14 +112,14 @@ class UserPage extends Component {
           <h2 className="donation-box__title">Hello again, {userData.name}</h2>
           <h2 className="donation-box__subtitle">Your current donations</h2>
           <div className="donation-box__tableheads">
-            <thead className="donation-box__tableheads--titles">Type</thead>
-            <thead className="donation-box__tableheads--titles">
+            <p className="donation-box__tableheads--titles">Type</p>
+            <p className="donation-box__tableheads--titles">
               Description
-            </thead>
-            <thead className="donation-box__tableheads--titles">Amount</thead>
-            <thead className="donation-box__tableheads--titles">
+            </p>
+            <p className="donation-box__tableheads--titles">Amount</p>
+            <p className="donation-box__tableheads--titles">
               Expires On
-            </thead>
+            </p>
           </div>
 
           {donations.map((donation) => {
