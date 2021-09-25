@@ -55,20 +55,20 @@ const SignUpPage = ({ history }) => {
       values.phone
     ) {
       setIsValid(true);
+      axios
+        .post("http://localhost:5000/users/signup", {
+          ...values,
+        })
+        .then((res) => {
+          console.log("token: ", res.data.authToken);
+          sessionStorage.setItem("authToken", res.data.authToken);
+          setLoggedIn(true);
+          setOpenModal(true);
+        })
+        .catch((error) => {
+          setErrorMessage(error.data.message);
+        });
     }
-    axios
-      .post("http://localhost:5000/users/signup", {
-        ...values,
-      })
-      .then((res) => {
-        console.log("token: ", res.data.authToken);
-        sessionStorage.setItem("authToken", res.data.authToken);
-        setLoggedIn(true);
-        setOpenModal(true);
-      })
-      .catch((error) => {
-        setErrorMessage(error.data.message);
-      });
   };
   return (
     <div className="signUp">

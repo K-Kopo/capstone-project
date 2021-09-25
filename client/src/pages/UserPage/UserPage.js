@@ -13,6 +13,7 @@ class UserPage extends Component {
     userDonations: [],
     openModal: false,
     isloading: true,
+    shouldRefresh: false,
   };
 
   // const [loggedIn, setLoggedIn] = useState(false);
@@ -45,7 +46,7 @@ class UserPage extends Component {
     if (authToken) {
       Promise.all([getUserProfile(), getDonations()])
         .then((results) => {
-          console.log(results);
+         
           this.setState({
             isloading: false,
             userData: results[0].data,
@@ -75,6 +76,17 @@ class UserPage extends Component {
     //   .catch((error) => console.log(error));
   }
   // console.log(this.state.userDonations);
+  deleteDonation = (event) => {
+    event.preventDefault();
+    console.log(event);
+    const id = event.target.id.value
+
+    axios.delete(`http://localhost:5000/donations/${id}`,{
+      
+    })
+    .then((response)=>console.log(response))
+    .catch((error)=>console.log(error))
+  }
   render() {
     const { userDonations, userData, isloading, loggedIn, openModal } =
       this.state;
@@ -110,12 +122,14 @@ class UserPage extends Component {
 
           {donations.map((donation) => {
             return (
-              <tr className="rest-donation" key={donation.id}>
-                <td className="rest-donation__item">{donation.type}</td>
-                <td className="rest-donation__item">{donation.description}</td>
-                <td className="rest-donation__item">{donation.amount}</td>
-                <td className="rest-donation__item">{donation.expires}</td>
-              </tr>
+              <form className="rest-donation" onSubmit={this.deleteDonation} key={donation.id}>
+                <input className="res-donation__item--hidden" name="id" value={donation.id} readOnly />
+                <input className="rest-donation__item" name="type" value={donation.type} readOnly />
+                <input className="rest-donation__item" name="description" value={donation.description} readOnly />
+                <input className="rest-donation__item" name="amount" value={donation.amount} readOnly />
+                <input className="rest-donation__item" name="expires" value={donation.expires} readOnly />
+                <button type="submit">Delete</button>
+              </form>
             );
           })}
           <div className="donation-box__btnbox">
@@ -139,6 +153,7 @@ class UserPage extends Component {
               <DonationModal
                 closeModal={()=>this.setState({openModal: false})}
                 userData={userData}
+                refreshPage={()=>this.setState({shouldRefresh: true})}
               />
             )}
             <button

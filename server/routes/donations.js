@@ -7,7 +7,7 @@ const User = require("../models/user");
 router
     .route("/:id")
     .get((req, res) => {
-        console.log(req.params.id);
+        
         Donation.where({ id: req.params.id})
             .fetch({ withRelated: ["user"] })
             .then((donation) => {
@@ -18,7 +18,7 @@ router
             });
     })
     .put((req, res) => {
-        console.log(req.body);
+   
         Donation.where({ id: req.params.id })
             .fetch()
             .then((donation) => {
@@ -40,6 +40,7 @@ router
             });
     })
     .delete((req, res) => {
+        console.log(req.params.id);
         Donation.where("id", req.params.id)
             .destroy()
             .then((deletedDonation) => {

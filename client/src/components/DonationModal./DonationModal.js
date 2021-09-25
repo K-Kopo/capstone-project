@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./DonationModal.scss";
 
-const DonationModal = ({ userData, closeModal }) => {
+const DonationModal = ({ userData, closeModal, refreshPage }) => {
   const [values, setValues] = useState({
     type: "",
     description: "",
@@ -50,6 +50,7 @@ const DonationModal = ({ userData, closeModal }) => {
   const addDonationContinue = () => {
     closeModal();
     history.push(`/users/${userData.id}`);
+    refreshPage();
   };
 
   return (

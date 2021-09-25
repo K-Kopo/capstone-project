@@ -95,7 +95,7 @@ const LogInModal = ({ closeModal }) => {
           </button>
           <button
             className="login__form--buttonbox-cancelbtn"
-            onClick={() => closeModal(false)}
+            onClick={() => closeModal()}
           >
             CANCEL
           </button>
