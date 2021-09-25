@@ -44,6 +44,9 @@
         @include button-style;
         margin-left: 2rem;
     }
+    &__donationbtn {
+        @include button-style;
+    }
     &__btnbox {
         display: flex;
         justify-content: flex-end;

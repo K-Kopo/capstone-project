@@ -80,22 +80,22 @@ const DonationsPage = ({ match, history }) => {
       {myDonations.map((donation) => { 
         return (
          <form className="donations-form" key={donation.id}>
-            <input className="donations-form__hidden" name="id" value={donation.id}></input>
-            <input className="donations-form__input" name="type" value={donation.type} ></input>
-            <input className="donations-form__input" name="description" value={donation.description}></input>
-            <input className="donations-form__input" name="amount" value={donation.amount}></input>
-            <input className="donations-form__input" name="expires" value={donation.expires}></input>
+            <input className="donations-form__hidden" name="id" value={donation.id} readOnly></input>
+            <input className="donations-form__input" name="type" value={donation.type} readOnly ></input>
+            <input className="donations-form__input" name="description" value={donation.description} readOnly></input>
+            <input className="donations-form__input" name="amount" value={donation.amount} readOnly></input>
+            <input className="donations-form__input" name="expires" value={donation.expires} readOnly></input>
             
           </form>);})}
       <h2>Available Donations</h2>
       {filteredDonations.map((donation) => {
         return (
           <form className="donations-form" onSubmit={handleOnSubmit} key={donation.id}>
-            <input className="donations-form__hidden" name="id" value={donation.id}></input>
-            <input className="donations-form__input" name="type" value={donation.type} ></input>
-            <input className="donations-form__input" name="description" value={donation.description}></input>
-            <input className="donations-form__input" name="amount" value={donation.amount}></input>
-            <input className="donations-form__input" name="expires" value={donation.expires}></input>
+            <input className="donations-form__hidden" name="id" value={donation.id}  readOnly></input>
+            <input className="donations-form__input" name="type" value={donation.type}  readOnly></input>
+            <input className="donations-form__input" name="description" value={donation.description} readOnly></input>
+            <input className="donations-form__input" name="amount" value={donation.amount} readOnly></input>
+            <input className="donations-form__input" name="expires" value={donation.expires} readOnly></input>
             <button className="donations-form__input" type="submit">add to my list</button>
           </form>
         );

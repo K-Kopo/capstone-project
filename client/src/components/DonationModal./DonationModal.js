@@ -12,6 +12,8 @@ const DonationModal = ({ userData, closeModal }) => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+
   const history = useHistory();
 
   const handleTypeChange = (event) => {
@@ -29,7 +31,9 @@ const DonationModal = ({ userData, closeModal }) => {
   const handleOnSubmit = (event) => {
     event.preventDefault();
     setSubmitted(true);
-
+    if (values.description && values.amount && values.type && values.expires) {
+      setIsValid(true);
+    }
     console.log(event.target);
     axios
       .post("http://localhost:5000/donations", {
@@ -37,16 +41,31 @@ const DonationModal = ({ userData, closeModal }) => {
         ...values,
       })
       .then((response) => {
-        history.push("/");
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  const addDonationContinue = () => {
+    closeModal();
+    history.push(`/users/${userData.id}`);
+  };
 
   return (
     <div className="donation-modal">
       <form className="donation-modal__form" onSubmit={handleOnSubmit}>
+        {submitted && isValid ? (
+          <>
+            <div className="donation-modal__success">Donation added!</div>
+            <button
+              className="donation-modal__success--btn"
+              onClick={() => addDonationContinue()}
+            >
+              Continue
+            </button>
+          </>
+        ) : null}
         <h2 className="donation-modal__title">
           Please fill out the form below
         </h2>
@@ -60,7 +79,11 @@ const DonationModal = ({ userData, closeModal }) => {
           <option value="prepared">Prepared Food</option>
           <option value="bulk">Bulk Ingredient</option>
         </select>
-        {submitted && !values.type ? <span className="donation-modal__form--error">Please select a type</span> : null}
+        {submitted && !values.type ? (
+          <span className="donation-modal__form--error">
+            Please select a type
+          </span>
+        ) : null}
 
         <label className="donation-modal__form--label" htmlFor="">
           Description of item
@@ -71,7 +94,11 @@ const DonationModal = ({ userData, closeModal }) => {
           value={values.description}
           placeholder="add description of item"
         ></input>
-        {submitted && !values.description ? <span className="donation-modal__form--error">Please enter a description</span> : null}
+        {submitted && !values.description ? (
+          <span className="donation-modal__form--error">
+            Please enter a description
+          </span>
+        ) : null}
         <label className="donation-modal__form--label" htmlFor="">
           Amount
         </label>
@@ -82,7 +109,11 @@ const DonationModal = ({ userData, closeModal }) => {
           value={values.amount}
           placeholder="enter amount"
         />
-       {submitted && !values.amount ? <span className="donation-modal__form--error">Please enter an amount</span> : null }
+        {submitted && !values.amount ? (
+          <span className="donation-modal__form--error">
+            Please enter an amount
+          </span>
+        ) : null}
         <label className="donation-modal__form--label" htmlFor="">
           Expires On
         </label>
@@ -93,14 +124,18 @@ const DonationModal = ({ userData, closeModal }) => {
           value={values.expires}
           placeholder="enter expiration date"
         />
-   {submitted && !values.expires ? <span className="donation-modal__form--error">Please enter an expiration date</span> : null }
+        {submitted && !values.expires ? (
+          <span className="donation-modal__form--error">
+            Please enter an expiration date
+          </span>
+        ) : null}
         <div className="donation-modal__form--btnbox">
           <button className="donation-modal__form--button" type="submit">
             SUBMIT
           </button>
           <button
             className="donation-modal__form--cancel"
-            onClick={() => closeModal(false)}
+            onClick={() => closeModal()}
           >
             CANCEL
           </button>

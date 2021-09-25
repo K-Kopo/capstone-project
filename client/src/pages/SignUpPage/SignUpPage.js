@@ -18,7 +18,6 @@ const SignUpPage = ({ history }) => {
   const [submitted, setSubmitted] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
 
@@ -47,9 +46,15 @@ const SignUpPage = ({ history }) => {
   };
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    if(values.name && values.username && values.password && values.email && values.phone) {
+    setSubmitted(true);
+    if (
+      values.name &&
+      values.username &&
+      values.password &&
+      values.email &&
+      values.phone
+    ) {
       setIsValid(true);
-      setSubmitted(true);
     }
     axios
       .post("http://localhost:5000/users/signup", {
@@ -148,7 +153,12 @@ const SignUpPage = ({ history }) => {
           <button className="signUp__form--btn" type="submit">
             SUBMIT
           </button>
-          <button className="signUp__form--cancelbtn">CANCEL</button>
+          <button
+            className="signUp__form--cancelbtn"
+            onClick={() => history.push("/")}
+          >
+            CANCEL
+          </button>
         </div>
       </form>
     </div>

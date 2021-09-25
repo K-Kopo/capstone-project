@@ -1,19 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import "./LogInModal.scss";
 
 const LogInModal = ({ closeModal }) => {
   const [userData, setUserData] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [values, setValues] = useState({
     username: "",
     password: "",
   });
   const history = useHistory();
-
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleUsernameChange = (event) => {
     setValues({ ...values, username: event.target.value });
@@ -24,20 +24,20 @@ const LogInModal = ({ closeModal }) => {
   };
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:5000/users/login", {
-        ...values,
-      })
-      .then((res) => {
-        sessionStorage.setItem("authToken", res.data.authToken);
-        setLoggedIn(true);
-        setErrorMessage("");
-        
-        // history.push("/users/");
-      })
-      .catch((error) => {
-        setErrorMessage(error);
-      });
+    setSubmitted(true);
+    if (values.username && values.password)
+      axios
+        .post("http://localhost:5000/users/login", {
+          ...values,
+        })
+        .then((res) => {
+          sessionStorage.setItem("authToken", res.data.authToken);
+          setLoggedIn(true);
+          setErrorMessage("");
+        })
+        .catch((error) => {
+          setErrorMessage(`this is your error: ${error}`);
+        });
 
     const userLog = userData.find((user) => user.username === values.username);
     console.log(userLog.id);
@@ -60,6 +60,7 @@ const LogInModal = ({ closeModal }) => {
   }, []);
   return (
     <div className="login">
+      {errorMessage}
       <form className="login__form" onSubmit={handleOnSubmit}>
         <label className="login__form--label" htmlFor="username">
           Username
@@ -71,6 +72,9 @@ const LogInModal = ({ closeModal }) => {
           type="text"
           placeholder="enter your username"
         />
+        {submitted && !values.username ? (
+          <span className="login__form--error">Please enter your username</span>
+        ) : null}
         <label className="login__form--label" htmlFor="password">
           Password
         </label>
@@ -81,9 +85,20 @@ const LogInModal = ({ closeModal }) => {
           value={values.password}
           placeholder="enter your password"
         />
+        {submitted && !values.password ? (
+          <span className="login__form--error">Please enter your username</span>
+        ) : null}
+
         <div className="login__form--buttonbox">
-          <button className="login__form--buttonbox-btn" type="submit">SUBMIT</button>
-          <button className="login__form--buttonbox-cancelbtn"onClick={() => closeModal(false)}>CANCEL</button>
+          <button className="login__form--buttonbox-btn" type="submit">
+            SUBMIT
+          </button>
+          <button
+            className="login__form--buttonbox-cancelbtn"
+            onClick={() => closeModal(false)}
+          >
+            CANCEL
+          </button>
         </div>
       </form>
     </div>
