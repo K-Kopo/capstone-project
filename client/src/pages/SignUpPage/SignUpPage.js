@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { Redirect } from "react-router-dom";
 import "./SignUpPage.scss";
 import axios from "axios";
 import LogInModal from "../../components/LogInModal/LogInModal";

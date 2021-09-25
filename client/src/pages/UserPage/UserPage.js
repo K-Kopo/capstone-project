@@ -1,34 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import {  withRouter } from "react-router-dom";
 import axios from "axios";
 import DonationModal from "../../components/DonationModal./DonationModal";
 import "../../components/DonationModal./DonationModal.scss";
 import "./UserPage.scss";
-import LogInButton from "../../components/LogInButton/LogInButton";
+import LogInModal from "../../components/LogInButton/LogInButton";
 
-const UserPage = ({ history }) => {
-  // state = {
-  //   loggedIn: false,
-  //   userData: [],
-  //   userDonations: [],
-  //   openModal: false,
-  //   isloading: true
-  // };
-
-  const [loggedIn, setLoggedIn] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState("");
-  const [userData, setUserData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [userDonations, setUserDonations] = useState([]);
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleAuthFail = () => {
-    sessionStorage.removeItem("authToken");
-    this.state.loggedIn(false);
+class UserPage extends Component  {
+  state = {
+    loggedIn: false,
+    userData: [],
+    userDonations: [],
+    openModal: false,
+    isloading: true
   };
 
-  useEffect(() => {
+  // const [loggedIn, setLoggedIn] = useState(false);
+  // // const [errorMessage, setErrorMessage] = useState("");
+  // const [userData, setUserData] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [userDonations, setUserDonations] = useState([]);
+  // const [openModal, setOpenModal] = useState(false);
+
+  // const handleAuthFail = () => {
+  //   sessionStorage.removeItem("authToken");
+  //   this.state.loggedIn(false);
+  // };
+  // const authToken = sessionStorage.getItem("authToken");
+ 
+
+  componentDidMount () {
     const authToken = sessionStorage.getItem("authToken");
+  
 
     function getUserProfile() {
       return axios.get("http://localhost:5000/users/profile", {
@@ -42,14 +45,17 @@ const UserPage = ({ history }) => {
       return axios.get("http://localhost:5000/donations/");
     }
     if (authToken) {
+      
       Promise.all([getUserProfile(), getDonations()])
         .then((results) => {
           console.log(results);
-
-          setUserData(results[0].data);
-          setUserDonations(results[1].data);
-          setLoggedIn(true);
-          setIsLoading(false);
+          this.setState({
+            isloading: false,
+            userData: results[0].data,
+            userDonations: results[1].data,
+            loggedIn: true,
+          })
+          
         })
         .catch((err) => console.log(err));
     }
@@ -71,28 +77,27 @@ const UserPage = ({ history }) => {
     //     // setIsLoading(false);
     //   })
     //   .catch((error) => console.log(error));
-  }, []);
-  // console.log(this.state.userDonations);
-
-  const logOut = () => {
-    sessionStorage.removeItem("authToken");
-    setLoggedIn(false);
-    history.push("/");
   };
+  // console.log(this.state.userDonations);
+  render() {
+    
+    const {userDonations, userData, isloading, loggedIn, openModal} = this.state;
+    // const history = useHistory();
 
-  if (!loggedIn)
-    return (
-      <div className="user__loginpage">
-        <h1>please log in!</h1>
-        <LogInButton />
-      </div>
-    );
-
+    
+    const logOut = () => {
+      sessionStorage.removeItem("authToken");
+      this.setState ({
+        
+        loggedIn: false
+      })
+      this.props.history.push("/");
+    };
   const donations = userDonations.filter(
     (donation) => donation.user_id === userData.id
   );
-
   return (
+    isloading ? <h1>please be patient</h1> : 
     <div>
       <div className="donation-box">
         <h2 className="donation-box__title">Hello again, {userData.name}</h2>
@@ -117,15 +122,15 @@ const UserPage = ({ history }) => {
           );
         })}
         <div className="donation-box__btnbox">
-          <button
+          {userData.role === "restaurant" ? <button
             className="donation-box__btn"
-            onClick={() => setOpenModal(true)}
+            onClick={() => this.setState({openModal:true})}
           >
             Add donation
-          </button>
+          </button> : <button onClick={()=>this.props.history.push(`/donations/${userData.id}`)}>Browse current donations</button>}
           {openModal && (
-            <DonationModal closeModal={setOpenModal} userData={userData} />
-          )}
+            <DonationModal closeModal={this.state.openModal} userData={userData} />
+            )} 
           <button
             className="donation-box__logoutbtn"
             onClick={() => logOut()}
@@ -135,7 +140,7 @@ const UserPage = ({ history }) => {
         </div>
       </div>
     </div>
-  );
+  );}
 };
 
-export default UserPage;
+export default withRouter(UserPage);

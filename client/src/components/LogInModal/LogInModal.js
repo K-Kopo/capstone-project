@@ -32,7 +32,8 @@ const LogInModal = ({ closeModal }) => {
         sessionStorage.setItem("authToken", res.data.authToken);
         setLoggedIn(true);
         setErrorMessage("");
-        history.push("/users/");
+        
+        // history.push("/users/");
       })
       .catch((error) => {
         setErrorMessage(error);
@@ -42,7 +43,7 @@ const LogInModal = ({ closeModal }) => {
     console.log(userLog.id);
     userLog.role === "restaurant"
       ? history.push(`/users/${userLog.id}`)
-      : history.push(`/donations/${userLog.id}`);
+      : history.push(`/users/${userLog.id}`);
   };
   useEffect(() => {
     let isSubscribed = true;
