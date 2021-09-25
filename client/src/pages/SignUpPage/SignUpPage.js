@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { Redirect } from "react-router-dom";
 import "./SignUpPage.scss";
 import axios from "axios";
+import LogInModal from "../../components/LogInModal/LogInModal";
 
 const SignUpPage = ({ history }) => {
   const [values, setValues] = useState({
@@ -12,9 +13,12 @@ const SignUpPage = ({ history }) => {
     email: "",
     phone: "",
   });
-
+  const [isValid, setIsValid] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
 
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
@@ -44,7 +48,10 @@ const SignUpPage = ({ history }) => {
   };
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target);
+    if(values.name && values.username && values.password && values.email && values.phone) {
+      setIsValid(true);
+      setSubmitted(true);
+    }
     axios
       .post("http://localhost:5000/users/signup", {
         ...values,
@@ -53,7 +60,7 @@ const SignUpPage = ({ history }) => {
         console.log("token: ", res.data.authToken);
         sessionStorage.setItem("authToken", res.data.authToken);
         setLoggedIn(true);
-        history.push("/login");
+        setOpenModal(true);
       })
       .catch((error) => {
         setErrorMessage(error.data.message);
@@ -61,7 +68,8 @@ const SignUpPage = ({ history }) => {
   };
   return (
     <div className="signUp">
- <h1 className="signUp__title">Please fill out the form below</h1>
+      {submitted && isValid && openModal ? <LogInModal /> : null}
+      <h1 className="signUp__title">Please fill out the form below</h1>
       <form className="signUp__form" onSubmit={handleOnSubmit} action="submit">
         <select
           className="signUp__form--input"
@@ -73,6 +81,9 @@ const SignUpPage = ({ history }) => {
           <option value="restaurant">Restaurant</option>
           <option value="food bank">Food Bank</option>
         </select>
+        {submitted && !values.role ? (
+          <span className="signup__form--error">Please select a role</span>
+        ) : null}
         <label className="signUp__form--label">name</label>
         <input
           className="signUp__form--input"
@@ -81,6 +92,10 @@ const SignUpPage = ({ history }) => {
           type="text"
           placeholder="enter your name"
         />
+        {submitted && !values.name ? (
+          <span className="signup__form--error">Please enter your name</span>
+        ) : null}
+
         <label className="signUp__form--label">username</label>
         <input
           className="signUp__form--input"
@@ -89,6 +104,10 @@ const SignUpPage = ({ history }) => {
           type="text"
           placeholder="enter your username"
         />
+        {submitted && !values.username ? (
+          <span className="signup__form--error">Please enter a username</span>
+        ) : null}
+
         <label className="signUp__form--label">phone</label>
         <input
           className="signUp__form--input"
@@ -97,14 +116,24 @@ const SignUpPage = ({ history }) => {
           type="text"
           placeholder="enter your phone"
         />
+        {submitted && !values.phone ? (
+          <span className="signup__form--error">
+            Please enter a phone number
+          </span>
+        ) : null}
         <label className="signUp__form--label">email</label>
         <input
           className="signUp__form--input"
           onChange={handleEmailChange}
           value={values.email}
-          type="text"
+          type="email"
           placeholder="enter your email"
         />
+        {submitted && !values.email ? (
+          <span className="signup__form--error">
+            Please enter a valid email
+          </span>
+        ) : null}
         <label className="signUp__form--label">password</label>
         <input
           className="signUp__form--input"
@@ -113,9 +142,14 @@ const SignUpPage = ({ history }) => {
           type="password"
           placeholder="enter your password"
         />
+        {submitted && !values.password ? (
+          <span className="signup__form--error">Please enter a password</span>
+        ) : null}
         <div className="signUp__form--btnbox">
-        <button className="signUp__form--btn" type="submit">SUBMIT</button>
-        <button className="signUp__form--cancelbtn">CANCEL</button>
+          <button className="signUp__form--btn" type="submit">
+            SUBMIT
+          </button>
+          <button className="signUp__form--cancelbtn">CANCEL</button>
         </div>
       </form>
     </div>

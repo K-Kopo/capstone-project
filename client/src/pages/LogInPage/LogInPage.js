@@ -8,6 +8,7 @@ const LogInPage = ({ history }) => {
     username: "",
     password: "",
   });
+  const [submitted, setSubmitted] = useState(false);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
