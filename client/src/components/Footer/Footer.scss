@@ -1,0 +1,29 @@
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+@import "../../Styles/partials/variables";
+
+.footer {
+    height: 15vh;
+    width: 100vw;
+    background-color: $footer_yellow;
+    border-top: 2px solid $primary_red;
+    font-family: "Oswald";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__main {
+        display: flex;
+       
+        
+        &--list {
+            font-size: 1.5rem;
+            list-style: none;
+            display:flex;
+            justify-content: space-evenly;
+            &--item {
+                margin-left: 2rem;
+            }
+        }
+    }
+
+}

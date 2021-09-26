@@ -1,10 +1,12 @@
 @import "../../Styles/partials/typography";
 @import "../../Styles/partials/mixins";
 
+
 .homepage {
   font-family: "Oswald";
   background: #BBD8B3;
-  height: 100vh;
+  height: 75vh;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

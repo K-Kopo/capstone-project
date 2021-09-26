@@ -1,39 +1,46 @@
 @import "../../Styles/partials/typography";
 @import "../../Styles/partials/mixins";
+@import "../../Styles/partials/variables";
+
+@include resets;
 
 .header {
   font-family: "Oswald";
   display: flex;
-  width: 100%;
+  width: 100vw;
   justify-content: space-between;
   align-items: center;
   background-color: white;
   height: 6rem;
   font-size: 1.5rem;
+  border-bottom: 2px solid $primary_red;
+
   // position: fixed;
   // top: 0;
   &__navlist {
     display: flex;
     flex-direction: row;
-    margin-right: 2rem;
+    margin-right: 4rem;
 
     &--link {
       list-style: none;
-      color: rgb(56, 102, 65, 0.75);
+      color: $footer_yellow;
       border-left: 2px solid rgb(56, 102, 65, 0.75);
+      // border-right: 1px solid rgb(56, 102, 65, 0.75);
+
       padding: 0rem 0.5rem 0rem 0.5rem;
       text-decoration: none;
       height: 2.5rem;
     }
   }
   &__home {
-    margin: 1rem;
+    margin: 2rem 4rem;
   }
 }
 a {
   text-decoration: none;
   &:visited {
-    color: #A29F15;
+    color: $footer_yellow;
   }
   &:hover {
     color: #bc4749;

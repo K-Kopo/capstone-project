@@ -1,11 +1,12 @@
 @import "../../Styles/partials/typography";
 @import "../../Styles/partials/mixins";
+@import "../../Styles/partials/variables";
 
 .signUp {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background: rgb(56, 102, 65, 0.75);
+  height: 75vh;
+  background: $primary_green;
   justify-content: flex-start;
   align-items: center;
   &__title {
@@ -16,10 +17,11 @@
     display: flex;
     flex-direction: column;
     margin: 0 2rem;
-    width: 50%;
+    width: 30%;
+    height: auto;
     &--input {
       @include input-style;
-      margin: 0.5rem 1rem;
+      margin: 0rem 1rem;
     }
     &--btnbox {
       display: flex;

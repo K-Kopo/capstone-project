@@ -6,6 +6,7 @@ import UserPage from "./pages/UserPage/UserPage";
 import Header from "./components/Header/Header";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import LogInPage from "./pages/LogInPage/LogInPage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/signup" component={SignUpPage} />
         <Route path="/login" component={LogInPage} />
       </Switch>
+      <Footer />
     </Router>
   );
 }
