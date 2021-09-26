@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./DonationsPage.scss";
 import LogInButton from "../../components/LogInButton/LogInButton";
+import {SiAddthis} from "react-icons/si";
 
 const DonationsPage = ({ match, history }) => {
   const [donationsData, setDonationsData] = useState([]);
@@ -75,8 +76,8 @@ const DonationsPage = ({ match, history }) => {
   const myDonations = donationsData.filter(donation => donation.user_id === userData.id)
   console.log(myDonations);
   return (
-    <div>
-      <h2>My Donations</h2>
+    <div className="donations-box">
+      <h2 className="donations-box__title">My Current Donations</h2>
       {myDonations.map((donation) => { 
         return (
          <form className="donations-form" key={donation.id}>
@@ -87,7 +88,7 @@ const DonationsPage = ({ match, history }) => {
             <input className="donations-form__input" name="expires" value={donation.expires} readOnly></input>
             
           </form>);})}
-      <h2>Available Donations</h2>
+      <h2 className="donations-box__title" >Available Donations</h2>
       {filteredDonations.map((donation) => {
         return (
           <form className="donations-form" onSubmit={handleOnSubmit} key={donation.id}>
@@ -96,7 +97,7 @@ const DonationsPage = ({ match, history }) => {
             <input className="donations-form__input" name="description" value={donation.description} readOnly></input>
             <input className="donations-form__input" name="amount" value={donation.amount} readOnly></input>
             <input className="donations-form__input" name="expires" value={donation.expires} readOnly></input>
-            <button className="donations-form__input" type="submit">add to my list</button>
+            <button className="donations-form__input" type="submit"><SiAddthis /></button>
           </form>
         );
       })}

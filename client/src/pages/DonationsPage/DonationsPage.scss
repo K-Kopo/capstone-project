@@ -3,19 +3,48 @@
 @import "../../Styles/partials/variables";
 
 // @include resets
+.donations-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Oswald";
+    background-color: $primary_green;
+    color: $primary_white;
+    height: 100vh;
+    &__title {
+        font-family: "Oswald";
+        color: $primary-black-chocolate;
 
+    }
+}
 .donations-form {
     display: flex;
-    justify-content: center;
-    margin-top: 2rem;
+    font-family: "Oswald";
+
+    justify-content: space-around;
+    background-color: whitesmoke;
+    height: 3rem;
+    border: 2px solid $primary_red;
+    margin-bottom: 1rem;
+    width: 75%;
+    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);
+    border-radius: 3px;
+    &__title {
+        font-family: "Oswald";
+
+    }
     &__hidden {
         display: none;
     }
     &__input {
+        color: $secondary-green;
+
        border: none; 
+       background-color: whitesmoke;
        font-family: "Oswald";
        font-size: 1.25rem;
-       margin-bottom: 1rem;
+    //    margin-bottom: 1rem;
        width: auto;
     }
     &__btn {

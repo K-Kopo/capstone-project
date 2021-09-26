@@ -26,19 +26,19 @@ export default class Fade extends Component {
         
         <Slider {...settings}>
           <div className="carousel-box">
-            <img className="carousel-photos" src={photo1} />
+            <img className="carousel-photos" src={photo1} alt={"food pantry"}/>
           </div>
           <div className="carousel-box">
-            <img className="carousel-photos" src={photo2} />
+            <img className="carousel-photos" src={photo2} alt={"close up on pantry shelves"}/>
           </div>
           <div className="carousel-box">
-            <img className="carousel-photos" src={photo3} />
+            <img className="carousel-photos" src={photo3} alt={"workers unloading donations"}/>
           </div>
           <div className="carousel-box">
-            <img className="carousel-photos" src={photo4} />
+            <img className="carousel-photos" src={photo4} alt={"food on a table"}/>
           </div>
           <div className="carousel-box">
-            <img className="carousel-photos" src={photo5} />
+            <img className="carousel-photos" src={photo5} alt={"chef in a kitchen"}/>
           </div>
         </Slider>
       </div>

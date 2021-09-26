@@ -2,78 +2,89 @@
 @import "../../Styles/partials/mixins";
 @import "../../Styles//partials/variables";
 
-.user__loginpage {
-    @include resets;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    
+.donation {
+  @include resets;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary_green;
 }
 .donation-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: "Oswald";
+  background-color: $primary_green;
+  color: $primary_white;
+  width: 75%;
+  height: 100vh;
+  &__tableheads {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    font-family: "Oswald";
-    background-color: $primary_green;
-    color: $primary_white;
-    height: 100vh;
-    &__tableheads {
-        display: flex;
-        justify-content: space-around;
-        width: 75%;
-        margin-bottom: 1rem;
-        &--titles {
-            width: 8rem;
+    justify-content: space-around;
+    width: 75%;
+    margin-bottom: 1rem;
+    &--titles {
+        color: $primary-black-chocolate;
+      width: 8rem;
+    }
+  }
+  &__title {
+    color: $primary-black-chocolate;
 
-        }
-    }
-    &__title {
-        margin: 1rem 0;
-    }
-    &__subtitle {
-        margin:0 0 1rem 0;
+    margin: 1rem 0;
+  }
+  &__subtitle {
+    color: $primary-black-chocolate;
 
-    }
-    &__btn {
-        @include button-style;
-        
-    }
-    &__logoutbtn {
-        @include button-style;
-        margin-left: 2rem;
-    }
-    &__donationbtn {
-        @include button-style;
-    }
-    &__btnbox {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%;
-        margin-right: 15rem;
-    }
+    margin: 0 0 1rem 0;
+  }
+  &__btn {
+    @include button-style;
+  }
+  &__logoutbtn {
+    @include button-style;
+    margin-left: 2rem;
+  }
+  &__donationbtn {
+    @include button-style;
+  }
+  &__btnbox {
+    display: flex;
+    justify-content: flex-end;
+    width: 75%;
+    
+  }
 }
 
 .rest-donation {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
+  background-color: whitesmoke;
+  height: 3rem;
+  border: 2px solid $primary_red;
+  margin-bottom: 1rem;
+  width: 75%;
+  box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);
+  border-radius: 3px;
+
+  // padding: 1rem;
+  &__item {
+    font-family: "Oswald";
+    font-size: 1.25rem;
+    border: none;
     background-color: whitesmoke;
-    height: 3rem;
-    border: 2px solid $primary_red;
-    margin-bottom: 1rem;
-    width: 75%;
-    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);
-    border-radius: 10px;
-    
+    margin: 0.25rem 1rem;
+    color: $secondary_green;
     // padding: 1rem;
-    &__item {
-        font-family: "Oswald";
-        font-size: 1.25rem;
-        // border: 1px solid $secondary_green;
-        margin: .25rem 1rem;
-        color: $primary_green;
-        // padding: 1rem;
-        width: 8rem;
+    width: 8rem;
+    &--hidden {
+      display: none;
     }
+    &--delete {
+        color: $primary_red;
+      background-color: whitesmoke;
+      border: none;
+    }
+  }
 }

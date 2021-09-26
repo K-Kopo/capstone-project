@@ -54,7 +54,7 @@ const LogInModal = ({ closeModal }) => {
     }
     axios
       .get("http://localhost:5000/users")
-      .then((response) => setUserData(response.data))
+      .then((response) => { if (isSubscribed) return setUserData(response.data)})
       .catch((error) => console.log(error));
     return () => (isSubscribed = false);
   }, []);
