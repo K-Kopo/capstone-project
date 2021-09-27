@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./DonationsPage.scss";
 import LogInButton from "../../components/LogInButton/LogInButton";
 import { SiAddthis } from "react-icons/si";
+import DonationsHeader from "../../components/DonationsHeader/DonationsHeader";
 
 const PORT = process.env.PORT || 5000;
 const dbUrl = `http://localhost:${PORT}`;
@@ -78,7 +79,9 @@ const DonationsPage = ({ match, history }) => {
 
   return (
     <div className="donations-box">
+      <h1>Hello again, {userData.name}!</h1>
       <h2 className="donations-box__title">My Current Donations</h2>
+      <DonationsHeader />
       {myDonations.map((donation) => {
         return (
           <form className="donations-form" key={donation.id}>
@@ -115,6 +118,7 @@ const DonationsPage = ({ match, history }) => {
         );
       })}
       <h2 className="donations-box__title">Available Donations</h2>
+      <DonationsHeader />
       {filteredDonations.map((donation) => {
         return (
           <form
