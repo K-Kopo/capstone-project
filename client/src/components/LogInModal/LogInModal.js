@@ -34,16 +34,16 @@ const LogInModal = ({ closeModal }) => {
           sessionStorage.setItem("authToken", res.data.authToken);
           setLoggedIn(true);
           setErrorMessage("");
+          const userLog = userData.find((user) => user.username === values.username);
+          console.log(userLog.id);
+          userLog.role === "restaurant"
+            ? history.push(`/users/${userLog.id}`)
+            : history.push(`/users/${userLog.id}`);
         })
         .catch((error) => {
           setErrorMessage(`this is your error: ${error}`);
         });
 
-    const userLog = userData.find((user) => user.username === values.username);
-    console.log(userLog.id);
-    userLog.role === "restaurant"
-      ? history.push(`/users/${userLog.id}`)
-      : history.push(`/users/${userLog.id}`);
   };
   useEffect(() => {
     let isSubscribed = true;

@@ -13,7 +13,7 @@ const DonationsPage = ({ match, history }) => {
   const [donationsData, setDonationsData] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [addDonation, setAddDonation] = useState(false);
   //   function handleAuthFail() {
   //     sessionStorage.removeItem("authToken");
@@ -31,7 +31,7 @@ const DonationsPage = ({ match, history }) => {
     })
       .then((res) => {
         setUserData(res.data);
-        setIsLoading(false);
+        // setIsLoading(false);
       })
       .catch((error) => console.log(error))
 
@@ -50,6 +50,7 @@ const DonationsPage = ({ match, history }) => {
   }, [addDonation]);
   const handleOnSubmit = (event) => {
     event.preventDefault();
+    console.log(event.target);
     const id = event.target.id.value
     axios.put(`${dbUrl}/donations/${id}`,  {
       type: event.target.type.value,
@@ -74,10 +75,14 @@ const DonationsPage = ({ match, history }) => {
     <LogInButton />
   </div>
   );
-  console.log(userData);
+  // console.log(userData);
+  const jsDate = (date)=> {
+  return new Date(date).toISOString().slice(0, 10);
+  }
   const filteredDonations = donationsData.filter(donation => donation.user_id !== userData.id)
   const myDonations = donationsData.filter(donation => donation.user_id === userData.id)
-  console.log(myDonations);
+//  const jsT = new Date(filteredDonations[0].expires).toISOString().slice(0, 10);
+//  console.log(jsT)
   return (
     <div className="donations-box">
       <h2 className="donations-box__title">My Current Donations</h2>
@@ -88,7 +93,7 @@ const DonationsPage = ({ match, history }) => {
             <input className="donations-form__input" name="type" value={donation.type} readOnly ></input>
             <input className="donations-form__input" name="description" value={donation.description} readOnly></input>
             <input className="donations-form__input" name="amount" value={donation.amount} readOnly></input>
-            <input className="donations-form__input" name="expires" value={donation.expires} readOnly></input>
+            <input className="donations-form__input" name="expires" value={jsDate(donation.expires)} ></input>
             
           </form>);})}
       <h2 className="donations-box__title" >Available Donations</h2>
@@ -99,7 +104,7 @@ const DonationsPage = ({ match, history }) => {
             <input className="donations-form__input" name="type" value={donation.type}  readOnly></input>
             <input className="donations-form__input" name="description" value={donation.description} readOnly></input>
             <input className="donations-form__input" name="amount" value={donation.amount} readOnly></input>
-            <input className="donations-form__input" name="expires" value={donation.expires} readOnly></input>
+            <input className="donations-form__input" name="expires" value={jsDate(donation.expires)} readOnly></input>
             <button className="donations-form__input" type="submit"><SiAddthis /></button>
           </form>
         );

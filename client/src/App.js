@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import Footer from "./components/Footer/Footer";
+import Donations from "./components/Donations/Donations";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/donations/:id" component={DonationsPage} />
         <Route path="/users/:id" component={UserPage} />
         <Route path="/signup" component={SignUpPage} />
-        <Route path="/login" component={LogInPage} />
+        <Route path="/donations" component={Donations} />
       </Switch>
       <Footer />
     </Router>
