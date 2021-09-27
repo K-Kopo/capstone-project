@@ -15,7 +15,7 @@
   justify-content: flex-start;
   align-items: center;
   font-family: "Oswald";
-  background-color: $primary_green;
+  background-color: $primary_green 50%;
   color: $primary_white;
   width: 75%;
   height: 100vh;
@@ -41,10 +41,20 @@
   }
   &__btn {
     @include button-style;
+    &:hover {
+      background-color: $secondary_green;
+      color: whitesmoke;
+    }
   }
   &__logoutbtn {
     @include button-style;
+    color: whitesmoke;
+    background-color: $primary_red;
     margin-left: 2rem;
+    &:hover {
+      background-color: whitesmoke;
+      color: $primary_red;
+    }
   }
   &__donationbtn {
     @include button-style;
@@ -62,7 +72,7 @@
   justify-content: space-around;
   background-color: whitesmoke;
   height: 3rem;
-  border: 2px solid $primary_red;
+  border: .5px solid $primary_red;
   margin-bottom: 1rem;
   width: 75%;
   box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);

@@ -121,7 +121,7 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
         <input
           className="donation-modal__form--input"
           onChange={handleExpiresChange}
-          type="text"
+          type="date"
           value={values.expires}
           placeholder="enter expiration date"
         />

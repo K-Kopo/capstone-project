@@ -4,6 +4,11 @@ import "./DonationsPage.scss";
 import LogInButton from "../../components/LogInButton/LogInButton";
 import {SiAddthis} from "react-icons/si";
 
+
+
+const PORT = process.env.PORT || 5000;
+const dbUrl = `http://localhost:${PORT}`
+
 const DonationsPage = ({ match, history }) => {
   const [donationsData, setDonationsData] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -19,12 +24,11 @@ const DonationsPage = ({ match, history }) => {
     const authToken = sessionStorage.getItem("authToken");
     authToken ? setLoggedIn(true) : setLoggedIn(false);
 
-    axios
-      .get("http://localhost:5000/users/profile", {
-        headers: {
-          authorization: `Bearer ${authToken}`,
-        },
-      })
+    axios.get(`${dbUrl}/users/profile`, {
+      headers: {
+        authorization: `Bearer ${authToken}`,
+      },
+    })
       .then((res) => {
         setUserData(res.data);
         setIsLoading(false);
@@ -38,8 +42,7 @@ const DonationsPage = ({ match, history }) => {
     //   })
     //   .catch((error) => console.log(error));
 
-    axios
-      .get("http://localhost:5000/donations")
+    axios.get(`${dbUrl}/donations`)
       .then((response) => {
         setDonationsData(response.data);
       })
@@ -48,7 +51,7 @@ const DonationsPage = ({ match, history }) => {
   const handleOnSubmit = (event) => {
     event.preventDefault();
     const id = event.target.id.value
-    axios.put(`http://localhost:5000/donations/${id}`, {
+    axios.put(`${dbUrl}/donations/${id}`,  {
       type: event.target.type.value,
       user_id: match.params.id,
       description: event.target.description.value,

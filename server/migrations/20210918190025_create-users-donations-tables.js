@@ -23,12 +23,12 @@ exports.up = function(knex) {
         .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      table.integer('amount').notNullable().defaultTo(0);
+      table.string('amount').notNullable().defaultTo(0);
       table.date('expires').notNullable();
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     });
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('inventories').dropTable('users');
+  return knex.schema.dropTable('donations').dropTable('users');
 };
