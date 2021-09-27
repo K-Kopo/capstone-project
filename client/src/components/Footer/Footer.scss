@@ -22,6 +22,13 @@
             justify-content: space-evenly;
             &--item {
                 margin-left: 2rem;
+                color: $primary_red;
+                &:hover {
+                    color: $primary-black-chocolate;
+                }
+                &:visited {
+                    color: $primary_red;
+                }
             }
         }
     }

@@ -1,0 +1,33 @@
+@import "../../Styles/partials/variables";
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+
+.about-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-green;
+    height: 75vh;
+    &__main {
+        background-color: $primary-black-chocolate;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 375px;
+        width: 609px;
+        transform: rotate(5deg);
+        border-radius: 3px;
+        margin-right: 3rem;
+        &--infographic {
+            height: 300px;
+            transform: rotate(-5deg);
+            
+        }
+        &--text {
+            font-family: "Oswald";
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+    }
+}

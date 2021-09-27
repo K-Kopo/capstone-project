@@ -12,9 +12,9 @@ const Footer = () => {
             <article className="footer__main">
                 <ul className="footer__main--list">
                     <li className="footer__main--list--item">Inquiries: secondhelpings@gmail.com</li>
-                    <li className="footer__main--list--item"><FaFacebookF/></li>
-                    <li className="footer__main--list--item"><FaInstagramSquare /></li>
-                    <li className="footer__main--list--item"><FaTwitter /></li>
+                    <a href="https://www.facebook.com"><li className="footer__main--list--item"><FaFacebookF/></li></a>
+                    <a href="https://www.instagram.com"><li className="footer__main--list--item"><FaInstagramSquare /></li></a>
+                    <a href="https://www.twitter.com"><li className="footer__main--list--item"><FaTwitter /></li></a>
                 </ul>
             </article>
             

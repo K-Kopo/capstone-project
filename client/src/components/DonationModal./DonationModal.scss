@@ -74,4 +74,20 @@ body {
       margin-left: 2rem;
     }
   }
+  &__success {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &--title {
+      color: $primary-red;
+
+    }
+    &--btn {
+      @include button-style;
+      height: 2rem;
+      width: 4rem;
+
+    }
+  }
 }

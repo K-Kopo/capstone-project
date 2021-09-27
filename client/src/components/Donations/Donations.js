@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import UserPage from '../../pages/UserPage/UserPage';
 import { AiTwotoneDelete } from "react-icons/ai";
+import { BiFoodMenu } from "react-icons/bi";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import DonationModal from "../../components/DonationModal./DonationModal";
 import { useHistory } from 'react-router';
@@ -10,7 +11,7 @@ import { useHistory } from 'react-router';
 
 
 
-const Donations = ({userdata, history, logout}) => {
+const Donations = ({userdata, history, logout }) => {
     const PORT = process.env.PORT || 5000;
     const dbUrl = `http://localhost:${PORT}`
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -26,15 +27,23 @@ const Donations = ({userdata, history, logout}) => {
         .then((res) => {
           setUserDonations(res.data);
           setIsLoading(false);
-          // this.setState({
-          //   userDonations: res.data,
-          //   isloading: false,
-          // });
+   
         })
         .catch((error) => console.log(error));
     
     },[shouldRefresh])
-      // console.log(this.state.userDonations);
+
+   const deleteDonation = (event) => {
+        event.preventDefault();
+        const id = event.target.id.value;
+    
+        axios
+          .delete(`http://localhost:5000/donations/${id}`, {})
+          .then((response) => console.log(response))
+    
+          .catch((error) => console.log(error));
+      };
+
  const deleteModal = () => {
     setOpenDeleteModal(true)
   }
@@ -44,14 +53,7 @@ const Donations = ({userdata, history, logout}) => {
   const jsDate = (date)=> {
     return new Date(date).toISOString().slice(0, 10);
     }
-    // const logOut = () => {
-    //     sessionStorage.removeItem("authToken");
-    //     setLoggedIn(false);
-    //     // this.setState({
-    //     //   loggedIn: false,
-    //     // });
-    //     history.push("/");
-    //   };
+
       console.log(userdata);
     const eachDonations = userDonations.filter(
         (donation) => donation.user_id === userdata.id
@@ -68,13 +70,14 @@ const Donations = ({userdata, history, logout}) => {
             <p className="donation-box__tableheads--titles">Description</p>
             <p className="donation-box__tableheads--titles">Amount</p>
             <p className="donation-box__tableheads--titles">Expires On</p>
+            <div><BiFoodMenu /></div>
           </div>
 
           {eachDonations.map((donation) => {
             return (
               <form
               className="rest-donation"
-              onSubmit={() => this.setState({ openDeleteModal: true })}
+              onSubmit={() => deleteDonation()}
               key={donation.id}
               >
       
@@ -110,7 +113,9 @@ const Donations = ({userdata, history, logout}) => {
                   />
                 <button
                   className="rest-donation__item--delete"
-                  onClick={() => setOpenDeleteModal(true)}
+                  type="submit"
+                  onClick={()=>setOpenDeleteModal(true)}
+             
                   >
                   <AiTwotoneDelete />
                 </button>
@@ -139,7 +144,9 @@ const Donations = ({userdata, history, logout}) => {
                   <DeleteModal
                   userDonations={eachDonations}
                     closeModal={() => setOpenDeleteModal(true)}
-                    deleteDonation={() => this.deleteDonation()}
+                    deleteDonation = {()=> deleteDonation()}
+                    refreshPage={() => setShouldRefresh(true)}
+
                   />
                 )}
             {openModal && (

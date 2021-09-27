@@ -57,15 +57,15 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
     <div className="donation-modal">
       <form className="donation-modal__form" onSubmit={handleOnSubmit}>
         {submitted && isValid ? (
-          <>
-            <div className="donation-modal__success">Donation added!</div>
+          <div className="donation-modal__success">
+            <div className="donation-modal__success--title">Donation added!</div>
             <button
               className="donation-modal__success--btn"
               onClick={() => addDonationContinue()}
             >
               Continue
             </button>
-          </>
+          </div>
         ) : null}
         <h2 className="donation-modal__title">
           Please fill out the form below

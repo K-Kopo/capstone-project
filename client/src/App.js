@@ -8,6 +8,7 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import Footer from "./components/Footer/Footer";
 import Donations from "./components/Donations/Donations";
+import AboutPage from "./pages/AboutPage/AboutPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/users/:id" component={UserPage} />
         <Route path="/signup" component={SignUpPage} />
         <Route path="/donations" component={Donations} />
+        <Route path="/about" component={AboutPage} />
       </Switch>
       <Footer />
     </Router>
