@@ -17,6 +17,7 @@ const Donations = ({userdata, history, logout}) => {
     const [userDonations, setUserDonations] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [shouldRefresh, setShouldRefresh] = useState(false);
 
     history = useHistory();
     useEffect(()=> {
@@ -32,7 +33,7 @@ const Donations = ({userdata, history, logout}) => {
         })
         .catch((error) => console.log(error));
     
-    },[])
+    },[shouldRefresh])
       // console.log(this.state.userDonations);
  const deleteModal = () => {
     setOpenDeleteModal(true)
@@ -40,6 +41,9 @@ const Donations = ({userdata, history, logout}) => {
   const closeDeleteModal = () =>  {
     setOpenDeleteModal(false)
   }
+  const jsDate = (date)=> {
+    return new Date(date).toISOString().slice(0, 10);
+    }
     // const logOut = () => {
     //     sessionStorage.removeItem("authToken");
     //     setLoggedIn(false);
@@ -53,10 +57,11 @@ const Donations = ({userdata, history, logout}) => {
         (donation) => donation.user_id === userdata.id
       );
     return isLoading ? <p>patience is a virtue</p> : (
+       
          <div className="donation">
              
         <div className="donation-box">
-          <h2 className="donation-box__title">Hello again,</h2>
+          <h2 className="donation-box__title">Hello again,{userdata.name}</h2>
           <h2 className="donation-box__subtitle">Your current donations</h2>
           <div className="donation-box__tableheads">
             <p className="donation-box__tableheads--titles">Type</p>
@@ -100,8 +105,8 @@ const Donations = ({userdata, history, logout}) => {
                 <input
                   className="rest-donation__item"
                   name="expires"
-                  value={donation.expires}
-                  readOnly
+                  value={jsDate(donation.expires)}
+                  
                   />
                 <button
                   className="rest-donation__item--delete"
@@ -141,7 +146,7 @@ const Donations = ({userdata, history, logout}) => {
               <DonationModal
                 closeModal={() => setOpenModal(false)}
                 userData={userdata}
-                // refreshPage={() => this.setState({ shouldRefresh: true })}
+                refreshPage={() => setShouldRefresh(true)}
               />
             )}
             <button
@@ -153,6 +158,7 @@ const Donations = ({userdata, history, logout}) => {
           </div>
         </div>
       </div>
+    
     );
 };
 
