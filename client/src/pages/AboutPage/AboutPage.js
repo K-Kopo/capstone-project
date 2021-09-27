@@ -1,5 +1,8 @@
 import React from 'react';
+
 import food_waste_graphic from "../../Assets/images/food-waste-infographic.jpg";
+import LogInButton from '../../components/LogInButton/LogInButton';
+import SignUpButton from '../../components/SignUpButton/SignUpButton';
 import "./AboutPage.scss";
 
 const About = () => {
@@ -14,8 +17,12 @@ const About = () => {
                 <p className="about-page__main--text">We created Second Helpings as a way to reduce food waste in our city </p>
                 <p className="about-page__main--text">as well as celebrate restaurants as a source of community.</p>
            
-            </aside>
+            <div className="about-page__buttonbox">
+                <SignUpButton />
+                <LogInButton />
+            </div>
             
+            </aside>
         </div>
     );
 };
