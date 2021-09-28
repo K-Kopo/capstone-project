@@ -34,6 +34,7 @@ const LogInModal = ({ closeModal }) => {
           sessionStorage.setItem("authToken", res.data.authToken);
           setLoggedIn(true);
           setErrorMessage("");
+          closeModal(false);
           const userLog = userData.find((user) => user.username === values.username);
           console.log(userLog.id);
           userLog.role === "restaurant"

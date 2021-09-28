@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
-import DonationModal from "../../components/DonationModal./DonationModal";
 import "../../components/DonationModal./DonationModal.scss";
 import "./UserPage.scss";
 
 import Donations from "../../components/Donations/Donations";
+import LogInButton from "../../components/LogInButton/LogInButton";
 
 const PORT = process.env.PORT || 5000;
 const dbUrl = `http://localhost:${PORT}`;
@@ -47,8 +46,6 @@ class UserPage extends Component {
     }
   }
 
-
-
   logOut = () => {
     sessionStorage.removeItem("authToken");
 
@@ -63,8 +60,13 @@ class UserPage extends Component {
     console.log(userData);
 
     return (
-      <div>
-        {!loggedIn && <h1>please be patient</h1>}
+      <div >
+        {!loggedIn && (
+          <div className="login-portal" >
+            <h1 className="bounce-in-top">Please Log In</h1>
+            <LogInButton />
+          </div>
+        )}
         {loggedIn && (
           <Donations
             userdata={userData}

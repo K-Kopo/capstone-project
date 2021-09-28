@@ -1,0 +1,18 @@
+@import "../../Styles/partials/typography";
+@import "../../Styles/partials/mixins";
+@import "../../Styles/partials/variables";
+
+
+.donation {
+    @include resets;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary_green;
+  }
+
+.donation-box {
+    &__title {
+        color: $primary-black-chocolate;
+    }
+}

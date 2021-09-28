@@ -6,6 +6,8 @@ import { BiFoodMenu } from "react-icons/bi";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import DonationModal from "../../components/DonationModal./DonationModal";
 import { useHistory } from 'react-router';
+import DonationsHeader from '../DonationsHeader/DonationsHeader';
+import "./Donations.scss";
 
 
 
@@ -63,15 +65,8 @@ const Donations = ({userdata, history, logout }) => {
          <div className="donation">
              
         <div className="donation-box">
-          <h2 className="donation-box__title">Hello again,{userdata.name}</h2>
-          <h2 className="donation-box__subtitle">Your current donations</h2>
-          <div className="donation-box__tableheads">
-            <p className="donation-box__tableheads--titles">Type</p>
-            <p className="donation-box__tableheads--titles">Description</p>
-            <p className="donation-box__tableheads--titles">Amount</p>
-            <p className="donation-box__tableheads--titles">Expires On</p>
-            <div><BiFoodMenu /></div>
-          </div>
+         <h1 className="donation-box__title">Welcome back, {userdata.name}</h1>
+         <DonationsHeader/>
 
           {eachDonations.map((donation) => {
             return (
