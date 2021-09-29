@@ -86,7 +86,8 @@ body {
     &--btn {
       @include button-style;
       height: 2rem;
-      width: 4rem;
+      width: 5.8rem;
+      margin-top: 1rem;
 
     }
   }

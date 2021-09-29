@@ -21,8 +21,10 @@
   &__signup-btn {
     @include button-style;
     margin: 2rem;
-    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     &:hover {
+      box-shadow:  0 1px 2px rgb(0 0 0 / 15%);
+      transition: opacity .3s ease-in-out;
       border-color: #bc4749;
       color: #bc4749;
     }
@@ -30,9 +32,10 @@
   &__login-btn {
     @include button-style;
     margin: 2rem;
-    box-shadow: 0px 2px 5px rgba(19, 24, 44, 0.2);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     &:hover {
-      border-color: #bc4749;
+     box-shadow:  0 1px 2px rgb(0 0 0 / 15%);
+    transition: opacity .3s ease-in-out;
       color: #bc4749;
     }
   }

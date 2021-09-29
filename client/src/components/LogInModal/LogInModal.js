@@ -35,16 +35,15 @@ const LogInModal = ({ closeModal }) => {
           setLoggedIn(true);
           setErrorMessage("");
           closeModal(false);
-          const userLog = userData.find((user) => user.username === values.username);
-          console.log(userLog.id);
-          userLog.role === "restaurant"
-            ? history.push(`/users/${userLog.id}`)
-            : history.push(`/users/${userLog.id}`);
+          const userLog = userData.find(
+            (user) => user.username === values.username
+          );
+
+          history.replace(`/users/${userLog.id}`, {loggedIn: true});
         })
         .catch((error) => {
           setErrorMessage(`this is your error: ${error}`);
         });
-
   };
   useEffect(() => {
     let isSubscribed = true;
@@ -55,7 +54,9 @@ const LogInModal = ({ closeModal }) => {
     }
     axios
       .get("http://localhost:5000/users")
-      .then((response) => { if (isSubscribed) return setUserData(response.data)})
+      .then((response) => {
+        if (isSubscribed) return setUserData(response.data);
+      })
       .catch((error) => console.log(error));
     return () => (isSubscribed = false);
   }, []);

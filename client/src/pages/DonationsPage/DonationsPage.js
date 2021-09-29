@@ -39,7 +39,7 @@ const DonationsPage = ({ match, history }) => {
   
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target);
+
     const id = event.target.id.value;
     axios
       .put(`${dbUrl}/donations/${id}`, {
@@ -71,7 +71,7 @@ const DonationsPage = ({ match, history }) => {
     return new Date(date).toISOString().slice(0, 10);
   };
   const filteredDonations = donationsData.filter(
-    (donation) => donation.user_id !== userData.id
+    (donation) => donation.user_id !== userData.id && donation.available !== 0
   );
   const myDonations = donationsData.filter(
     (donation) => donation.user_id === userData.id

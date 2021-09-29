@@ -72,7 +72,7 @@ const SignUpPage = ({ history }) => {
   };
   return (
     <div className="signUp">
-      {submitted && isValid && openModal ? <LogInModal /> : null}
+      {submitted && isValid && openModal ? <LogInModal closeModal={setOpenModal}/> : null}
       <h1 className="signUp__title">Please fill out the form below</h1>
       <form className="signUp__form" onSubmit={handleOnSubmit} action="submit">
         <select

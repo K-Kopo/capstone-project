@@ -63,7 +63,7 @@ class UserPage extends Component {
       <div >
         {!loggedIn && (
           <div className="login-portal" >
-            <h1 className="bounce-in-top">Please Log In</h1>
+            <h1 className="flip-in-hor-bottom">Please Log In</h1>
             <LogInButton />
           </div>
         )}

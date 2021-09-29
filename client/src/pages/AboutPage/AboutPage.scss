@@ -8,13 +8,14 @@
     align-items: center;
     background-color: $primary-green;
     height: 75vh;
+    width: 100vw;
     &__main {
         background-color: $primary-black-chocolate;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 375px;
-        width: 609px;
+        height: 325px;
+        width: 639px;
         transform: rotate(5deg);
         border-radius: 3px;
         margin-right: 3rem;
@@ -24,7 +25,7 @@
             
         }
         &--text {
-            font-family: "Oswald";
+            font-family: "Oswald", sans-serif;
             font-size: 1.5rem;
             text-align: center;
         }

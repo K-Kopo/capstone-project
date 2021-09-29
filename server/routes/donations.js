@@ -28,6 +28,7 @@ router
                         description: req.body.description,
                         user_id: req.body.user_id,
                         amount: req.body.amount,
+                        available: 0,
                         expires: req.body.expires,
                         type: req.body.type
                     })
