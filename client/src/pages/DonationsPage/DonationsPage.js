@@ -78,6 +78,7 @@ const DonationsPage = ({ match, history }) => {
   );
 
   return (
+    <div className="donations">
     <div className="donations-box">
       <h1>Hello again, {userData.name}!</h1>
       <h2 className="donations-box__title">My Current Donations</h2>
@@ -165,6 +166,7 @@ const DonationsPage = ({ match, history }) => {
       <button className="donations-form__btn" onClick={() => logOut()}>
         Logout
       </button>
+    </div>
     </div>
   );
 };

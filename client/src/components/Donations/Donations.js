@@ -103,21 +103,20 @@ const Donations = ({ userdata, history, logout }) => {
               <button
                 className="rest-donation__item--delete"
                 type="submit"
-                // onClick={deleteModalOpen}
               >
                 <AiTwotoneDelete />
               </button>
-              {openDeleteModal && (
-                <DeleteModal
-                  deleteItem={donation.id}
-                  closeDeleteModal={closeDeleteModal}
-                  deleteDonation={deleteDonation}
-                  donatedItem={donation.description}
-                />
-              )}
             </form>
           );
         })}
+        {openDeleteModal && (
+          <DeleteModal
+            // deleteItem={donation.id}
+            closeDeleteModal={closeDeleteModal}
+            deleteDonation={deleteDonation}
+            // donatedItem={donation.description}
+          />
+        )}
         <div className="donation-box__btnbox">
           {userdata.role === "restaurant" ? (
             <button
