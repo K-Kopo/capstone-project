@@ -16,6 +16,7 @@ const Donations = ({ userdata, history, logout }) => {
   const [openModal, setOpenModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [shouldRefresh, setShouldRefresh] = useState(false);
+  const [currentDonationId, setCurrentDonationId] = useState(null);
 
   history = useHistory();
 
@@ -27,19 +28,19 @@ const Donations = ({ userdata, history, logout }) => {
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
-  }, [shouldRefresh]);
+  }, [shouldRefresh, openDeleteModal]);
 
-  const deleteDonation = (itemDelete) => {
-    const id = itemDelete;
+  const deleteDonation = () => {
     axios
-      .delete(`http://localhost:5000/donations/${id}`)
-      .then((response) => console.log(response))
+      .delete(`http://localhost:5000/donations/${currentDonationId}`)
+      .then((response) => console.log(response), setOpenDeleteModal(false))
 
       .catch((error) => console.log(error));
   };
-  
-  const deleteModalOpen = (event) => {
+
+  const deleteModalOpen = (event, donationId) => {
     event.preventDefault();
+    setCurrentDonationId(donationId);
     setOpenDeleteModal(true);
   };
   const closeDeleteModal = () => {
@@ -48,6 +49,9 @@ const Donations = ({ userdata, history, logout }) => {
 
   const openDonationModal = () => {
     setOpenModal(true);
+  };
+  const refresh = () => {
+    shouldRefresh ? setShouldRefresh(false) : setShouldRefresh(true);
   };
   const jsDate = (date) => {
     return new Date(date).toISOString().slice(0, 10);
@@ -68,7 +72,7 @@ const Donations = ({ userdata, history, logout }) => {
           return (
             <form
               className="rest-donation"
-              onSubmit={(event) => deleteModalOpen(event)}
+              onSubmit={(event) => deleteModalOpen(event, donation.id)}
               key={donation.id}
             >
               <input
@@ -100,10 +104,7 @@ const Donations = ({ userdata, history, logout }) => {
                 name="expires"
                 defaultValue={jsDate(donation.expires)}
               />
-              <button
-                className="rest-donation__item--delete"
-                type="submit"
-              >
+              <button className="rest-donation__item--delete" type="submit">
                 <AiTwotoneDelete />
               </button>
             </form>
@@ -111,10 +112,8 @@ const Donations = ({ userdata, history, logout }) => {
         })}
         {openDeleteModal && (
           <DeleteModal
-            // deleteItem={donation.id}
             closeDeleteModal={closeDeleteModal}
             deleteDonation={deleteDonation}
-            // donatedItem={donation.description}
           />
         )}
         <div className="donation-box__btnbox">
@@ -137,7 +136,7 @@ const Donations = ({ userdata, history, logout }) => {
             <DonationModal
               closeModal={() => setOpenModal(false)}
               userData={userdata}
-              refreshPage={() => setShouldRefresh(true)}
+              refreshPage={() => refresh()}
             />
           )}
           <button className="donation-box__logoutbtn" onClick={() => logout()}>

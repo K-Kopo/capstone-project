@@ -8,7 +8,6 @@ const LogInPage = ({ history }) => {
     username: "",
     password: "",
   });
-  const [submitted, setSubmitted] = useState(false);
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,16 +29,13 @@ const LogInPage = ({ history }) => {
         sessionStorage.setItem("authToken", res.data.authToken);
         setLoggedIn(true);
         setErrorMessage("");
-        // history.push("/users/");
       })
       .catch((error) => {
         setErrorMessage(error);
       });
 
     const userLog = userData.find((user) => user.username === values.username);
-    userLog.role === "restaurant"
-      ? history.push(`/users/${userLog.id}`)
-      : history.push(`/donations/${userLog.id}`);
+    history.push(`/users/${userLog.id}`);
   };
   useEffect(() => {
     let isSubscribed = true;

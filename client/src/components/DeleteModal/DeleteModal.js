@@ -2,7 +2,7 @@ import React from 'react'
 import './DeleteModal.scss';
 import {FcCancel} from "react-icons/fc";
 
-const DeleteModal = ( {closeDeleteModal, deleteDonation, deleteItem }) => {
+const DeleteModal = ( {closeDeleteModal, deleteDonation }) => {
     
     return (
         <div className='delete-modal'>
@@ -13,7 +13,7 @@ const DeleteModal = ( {closeDeleteModal, deleteDonation, deleteItem }) => {
                 </div>
                 <div className='delete-modal__footer'>
                     <button className='delete-modal__footer-cancel' onClick={closeDeleteModal}>Cancel</button>
-                    <button className='delete-modal__footer-delete' type="submit" onClick={()=>deleteDonation(deleteItem)}>Delete?</button>
+                    <button className='delete-modal__footer-delete' type="submit" onClick={deleteDonation}>Delete?</button>
                 </div>
            
         </div>

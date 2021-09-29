@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage/HomePage";
 import UserPage from "./pages/UserPage/UserPage";
 import Header from "./components/Header/Header";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
-import LogInPage from "./pages/LogInPage/LogInPage";
 import Footer from "./components/Footer/Footer";
 import Donations from "./components/Donations/Donations";
 import AboutPage from "./pages/AboutPage/AboutPage";

@@ -11,7 +11,8 @@ const HomePage = ({history}) => {
     <section className="homepage">
       <div className="homepage__title">
       <h1>Second Helpings</h1>
-      <p className="homepage__title--subtitle">Helping to connect those who <span className="white-highlight">have</span><br/> with those who <span className="white-highlight">need</span></p>
+      <p className="homepage__title--subtitle">A community oriented effort to reduce food waste by<br/>
+      helping to connect those who <span className="white-highlight">have</span> (restaurants)<br/> with those who <span className="white-highlight">need</span> (food banks)</p>
       </div>
       <div className="homepage__content">
       <article className="homepage__content--carousel">

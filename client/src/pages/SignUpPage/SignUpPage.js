@@ -70,7 +70,7 @@ const SignUpPage = ({ history }) => {
         });
     }
   };
-  return (
+  return ( 
     <div className="signUp">
       {submitted && isValid && openModal ? <LogInModal closeModal={setOpenModal}/> : null}
       <h1 className="signUp__title">Please fill out the form below</h1>

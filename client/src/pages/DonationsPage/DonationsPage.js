@@ -154,8 +154,8 @@ const DonationsPage = ({ match, history }) => {
             <input
               className="donations-form__input"
               name="expires"
-              value={jsDate(donation.expires)}
-              readOnly
+              defaultValue={jsDate(donation.expires)}
+             
             ></input>
             <button className="donations-form__input" type="submit">
               <SiAddthis />
