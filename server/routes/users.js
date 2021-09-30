@@ -22,7 +22,7 @@ const signJWTToken = user => {
     return token;
   }
 
-// get all users
+
 router.route("/").get((req, res) => {
   user
     .fetchAll()
@@ -34,18 +34,7 @@ router.route("/").get((req, res) => {
     });
 });
 
-// get single users by id
-// router.route("/:id").get((req, res) => {
-//   user
-//     .where({ id: req.params.id })
-//     .fetch({ withRelated: ["donations"] })
-//     .then((user) => {
-//       res.status(200).json(user);
-//     })
-//     .catch(() => {
-//       res.status(400).json({ message: "Error, can't get users" });
-//     });
-// });
+
 
 router.route("/signup").post((req, res) => {
   const { password } = req.body;

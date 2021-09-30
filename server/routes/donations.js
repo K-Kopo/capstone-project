@@ -41,7 +41,6 @@ router
             });
     })
     .delete((req, res) => {
-        console.log(req.params.id);
         Donation.where("id", req.params.id)
             .destroy()
             .then((deletedDonation) => {
