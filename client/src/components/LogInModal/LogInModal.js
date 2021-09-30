@@ -39,7 +39,7 @@ const LogInModal = ({ closeModal }) => {
             (user) => user.username === values.username
           );
 
-          history.replace(`/users/${userLog.id}`, {loggedIn: true});
+          history.push(`/users/${userLog.id}`, {loggedIn: true});
         })
         .catch((error) => {
           setErrorMessage(`this is your error: ${error}`);
