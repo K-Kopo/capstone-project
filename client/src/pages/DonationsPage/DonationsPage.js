@@ -36,7 +36,7 @@ const DonationsPage = ({ match, history }) => {
       })
       .catch((error) => console.log(error));
   }, [addDonation]);
-  
+
   const handleOnSubmit = (event) => {
     event.preventDefault();
 
@@ -79,94 +79,93 @@ const DonationsPage = ({ match, history }) => {
 
   return (
     <div className="donations">
-    <div className="donations-box">
-      <h1>Hello again, {userData.name}!</h1>
-      <h2 className="donations-box__title">My Current Donations</h2>
-      <DonationsHeader />
-      {myDonations.map((donation) => {
-        return (
-          <form className="donations-form" key={donation.id}>
-            <input
-              className="donations-form__hidden"
-              name="id"
-              value={donation.id}
-              readOnly
-            ></input>
-            <input
-              className="donations-form__input"
-              name="type"
-              value={donation.type}
-              readOnly
-            ></input>
-            <input
-              className="donations-form__input"
-              name="description"
-              value={donation.description}
-              readOnly
-            ></input>
-            <input
-              className="donations-form__input"
-              name="amount"
-              value={donation.amount}
-              readOnly
-            ></input>
-            <input
-              className="donations-form__input"
-              name="expires"
-              value={jsDate(donation.expires)}
-            ></input>
-          </form>
-        );
-      })}
-      <h2 className="donations-box__title">Available Donations</h2>
-      <DonationsHeader />
-      {filteredDonations.map((donation) => {
-        return (
-          <form
-            className="donations-form"
-            onSubmit={handleOnSubmit}
-            key={donation.id}
-          >
-            <input
-              className="donations-form__hidden"
-              name="id"
-              value={donation.id}
-              readOnly
-            ></input>
-            <input
-              className="donations-form__input"
-              name="type"
-              value={donation.type}
-              readOnly
-            ></input>
-            <input
-              className="donations-form__input"
-              name="description"
-              value={donation.description}
-              readOnly
-            ></input>
-            <input
-              className="donations-form__input"
-              name="amount"
-              value={donation.amount}
-              readOnly
-            ></input>
-            <input
-              className="donations-form__input"
-              name="expires"
-              defaultValue={jsDate(donation.expires)}
-             
-            ></input>
-            <button className="donations-form__input" type="submit">
-              <SiAddthis />
-            </button>
-          </form>
-        );
-      })}
-      <button className="donations-form__btn" onClick={() => logOut()}>
-        Logout
-      </button>
-    </div>
+      <div className="donations-box">
+        <h1>Hello again, {userData.name}!</h1>
+        <h2 className="donations-box__title">My Current Donations</h2>
+        <DonationsHeader />
+        {myDonations.map((donation) => {
+          return (
+            <form className="donations-form" key={donation.id}>
+              <input
+                className="donations-form__hidden"
+                name="id"
+                value={donation.id}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="type"
+                value={donation.type}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="description"
+                value={donation.description}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="amount"
+                value={donation.amount}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="expires"
+                value={jsDate(donation.expires)}
+              ></input>
+            </form>
+          );
+        })}
+        <h2 className="donations-box__title">Available Donations</h2>
+        <DonationsHeader />
+        {filteredDonations.map((donation) => {
+          return (
+            <form
+              className="donations-form"
+              onSubmit={handleOnSubmit}
+              key={donation.id}
+            >
+              <input
+                className="donations-form__hidden"
+                name="id"
+                value={donation.id}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="type"
+                value={donation.type}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="description"
+                value={donation.description}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="amount"
+                value={donation.amount}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="expires"
+                defaultValue={jsDate(donation.expires)}
+              ></input>
+              <button className="donations-form__input" type="submit">
+                <SiAddthis />
+              </button>
+            </form>
+          );
+        })}
+        <button className="donations-form__btn" onClick={() => logOut()}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

@@ -3,36 +3,34 @@
 @import "../../Styles/partials/mixins";
 
 .about-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-green;
+  height: 75vh;
+  width: 100vw;
+  &__main {
+    background-color: $primary-black-chocolate;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $primary-green;
-    height: 75vh;
-    width: 100vw;
-    &__main {
-        background-color: $primary-black-chocolate;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 325px;
-        width: 639px;
-        transform: rotate(5deg);
-        border-radius: 3px;
-        margin-right: 3rem;
-        &--infographic {
-            height: 300px;
-            transform: rotate(-5deg);
-            
-        }
-        &--text {
-            font-family: "Oswald", sans-serif;
-            font-size: 1.5rem;
-            text-align: center;
-        }
-        
+    height: 325px;
+    width: 639px;
+    transform: rotate(5deg);
+    border-radius: 3px;
+    margin-right: 3rem;
+    &--infographic {
+      height: 300px;
+      transform: rotate(-5deg);
     }
-    &__buttonbox {
-        display: flex;
-        justify-content: center;
+    &--text {
+      font-family: "Oswald", sans-serif;
+      font-size: 1.5rem;
+      text-align: center;
     }
+  }
+  &__buttonbox {
+    display: flex;
+    justify-content: center;
+  }
 }

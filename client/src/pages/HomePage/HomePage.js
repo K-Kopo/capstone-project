@@ -3,6 +3,7 @@ import "./HomePage.scss";
 import { Link } from "react-router-dom";
 import PhotoCarousel from "../../components/PhotoCarousel/PhotoCarousel"
 import LogInButton from "../../components/LogInButton/LogInButton";
+import SignUpButton from "../../components/SignUpButton/SignUpButton";
 
 
 
@@ -19,9 +20,7 @@ const HomePage = ({history}) => {
       <PhotoCarousel />
       </article>
       <article className="homepage__buttonbox">
-        <Link to="/signup">
-          <button className="homepage__signup-btn">Sign Up</button>
-        </Link>
+        <SignUpButton />
         <LogInButton history={history}/>
       </article>
       </div>

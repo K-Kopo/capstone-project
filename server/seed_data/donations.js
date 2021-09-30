@@ -5,7 +5,8 @@ module.exports = [
     type: "prepared",
     description: "lamb empanadas",
     amount: "20",
-    expires: 100221
+    available: 1,
+    expires: "2021-10-12"
 },
 {
     id: 2,
@@ -13,7 +14,8 @@ module.exports = [
     type: "bulk",
     description: "heads of cabbage",
     amount: "12",
-    expires: 100821
+    available: 1,
+    expires: "2021-10-15"
 },
 {
     id: 3,
@@ -21,7 +23,8 @@ module.exports = [
     type: "prepared",
     description: "meat pies",
     amount: "15",
-    expires: 100421
+    available: 1,
+    expires: "2021-10-25"
 },
 {
     id: 4,
@@ -29,6 +32,25 @@ module.exports = [
     type: "bulk",
     description: "blocks of cheddar cheese",
     amount: "13",
-    expires: 101021
+    available: 1,
+    expires: "2021-10-23"
+},
+{
+    id: 5,
+    user_id: 6,
+    type: "bulk",
+    description: "carrots",
+    amount: "10lbs",
+    available: 1,
+    expires: "2021-10-23"
+},
+{
+    id: 6,
+    user_id: 6,
+    type: "bulk",
+    description: "celery",
+    amount: "5lbs",
+    available: 1,
+    expires: "2021-10-23"
 }
 ];

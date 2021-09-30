@@ -34,7 +34,6 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
     if (values.description && values.amount && values.type && values.expires) {
       setIsValid(true);
     }
-    console.log(event.target);
     axios
       .post("http://localhost:5000/donations", {
         user_id: userData.id,
@@ -58,7 +57,9 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
       <form className="donation-modal__form" onSubmit={handleOnSubmit}>
         {submitted && isValid ? (
           <div className="donation-modal__success">
-            <div className="donation-modal__success--title">Donation added!</div>
+            <div className="donation-modal__success--title">
+              Donation added!
+            </div>
             <button
               className="donation-modal__success--btn"
               onClick={() => addDonationContinue()}

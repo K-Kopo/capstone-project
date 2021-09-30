@@ -15,7 +15,7 @@
   font-size: 1.5rem;
   border-bottom: 2px solid $primary_red;
   padding-left: 2rem;
-  &__bars {
+  &__home {
     background-size: 4rem;
   }
 }
@@ -23,7 +23,6 @@
   margin-left: 4rem;
   font-size: 2rem;
   background: none;
-
 }
 .nav-menu {
   background-color: white;
@@ -31,14 +30,39 @@
   height: 50vh;
   display: flex;
   justify-content: center;
-  position:fixed;
+  position: fixed;
   top: 0;
   left: -100%;
   transition: 850ms;
   border: 2px solid $primary_red;
+  &__items {
+    width: 100%;
+    padding: 0;
+    &--toggle {
+      background-color: white;
+      width: 100%;
+      height: 5rem;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+    }
+    &--bars {
+      margin-left: 4rem;
+      font-size: 2rem;
+      background: none;
+    }
+    &--text {
+      font-family: "Oswalk", sans-serif;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      padding: 0.5rem 0rem 0.5rem 3.25rem;
+      list-style: none;
+      height: 4rem;
+    }
+  }
 }
 .nav-menu.active {
-
   left: 0;
   transition: 350ms;
 }
@@ -47,7 +71,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: .5rem 0rem .5rem 1rem;
+  padding: 0.5rem 0rem 0.5rem 1rem;
   list-style: none;
   height: 4rem;
 }
@@ -63,46 +87,7 @@
   padding: 0 1rem;
   border-radius: 3px;
 }
-.nav-text a:hover {
-  background-color: $primary-green;
-}
 
-.nav-menu-items {
-  width: 100%;
-  padding: 0;
-}
-
-.navbar-toggle {
-  background-color: white;
-  width: 100%;
-  height: 5rem;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
-  // position: fixed;
-  // top: 0;
-//   &__navlist {
-//     display: flex;
-//     flex-direction: row;
-//     margin-right: 4rem;
-
-//     &--link {
-//       list-style: none;
-//       color: $footer_yellow;
-//       border-left: 2px solid rgb(56, 102, 65, 0.75);
-//       // border-right: 1px solid rgb(56, 102, 65, 0.75);
-
-//       padding: 0rem 0.5rem 0rem 0.5rem;
-//       text-decoration: none;
-//       height: 2.5rem;
-//     }
-//   }
-//   &__home {
-//     margin: 2rem 4rem;
-//   }
-// }
 a {
   text-decoration: none;
   &:visited {
@@ -112,38 +97,3 @@ a {
     color: #bc4749;
   }
 }
-.bm-burger-button {
-  position: fixed;
-  width: 36px;
-  height: 30px;
-  left: 36px;
-  top: 36px;
-}
-
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  background: #373a47;
-}
-
-/* Color/shape of burger icon bars on hover*/
-.bm-burger-bars-hover {
-  background: #a90000;
-}
-
-/* Position and sizing of clickable cross button */
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
-
-/* Color/shape of close button cross */
-.bm-cross {
-  background: #bdc3c7;
-}
-// &:active {
-// //   box-shadow: 2px 2px 5px white, -1px -1px 5px #64b5f6;
-// }
-// &:hover {
-// //   box-shadow: 2px 2px 5px white, -1px -1px 5px #919a76;
-// }
-// }

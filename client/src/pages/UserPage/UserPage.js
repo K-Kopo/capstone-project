@@ -57,12 +57,11 @@ class UserPage extends Component {
 
   render() {
     const { loggedIn, userData } = this.state;
-    console.log(userData);
 
     return (
-      <div >
+      <div>
         {!loggedIn && (
-          <div className="login-portal" >
+          <div className="login-portal">
             <h1 className="bounce-in-top">Please Log In</h1>
             <LogInButton />
           </div>
