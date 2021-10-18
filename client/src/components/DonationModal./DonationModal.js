@@ -9,6 +9,7 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
     description: "",
     amount: "",
     expires: "",
+    name: userData.name,
   });
 
   const [submitted, setSubmitted] = useState(false);

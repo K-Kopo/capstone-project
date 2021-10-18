@@ -123,6 +123,13 @@ const DonationsPage = ({ match, history }) => {
                 className="donations-form__input"
                 name="expires"
                 value={jsDate(donation.expires)}
+                readOnly
+              ></input>
+              <input
+                className="donations-form__input"
+                name="rest_name"
+                value={donation.rest_name}
+                readOnly
               ></input>
             </form>
           );
@@ -164,6 +171,12 @@ const DonationsPage = ({ match, history }) => {
                 className="donations-form__input"
                 name="expires"
                 defaultValue={jsDate(donation.expires)}
+              ></input>
+                <input
+                className="donations-form__input"
+                name="rest_name"
+                value={donation.rest_name}
+                readOnly
               ></input>
               <button className="donations-form__input" type="submit">
                 <SiAddthis />

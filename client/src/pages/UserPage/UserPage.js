@@ -64,7 +64,7 @@ class UserPage extends Component {
   };
 
   render() {
-    const { loggedIn, userData } = this.state;
+    const { loggedIn, userData, allUsers } = this.state;
 
     return (
       <div>
@@ -79,7 +79,7 @@ class UserPage extends Component {
             userdata={userData}
             deleteDonation={() => this.deleteDonation()}
             logout={this.logOut}
-            allUsers={this.state.allUsers}
+            allUsers={allUsers}
           />
         )}
       </div>

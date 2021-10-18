@@ -62,7 +62,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
   );
 
 
-  const restId = userDonations.filter(donation => donation.user_id === allUsers.id)
+  const restId = userDonations.filter(donation => donation.user_id === userdata.id)
   console.log(eachDonations);
   console.log(allUsers);
   console.log(restId);

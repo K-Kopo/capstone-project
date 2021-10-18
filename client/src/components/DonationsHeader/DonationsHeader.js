@@ -10,6 +10,7 @@ const DonationsHeader = () => {
         <p className="donation-innerbox__tableheads--titles">Description</p>
         <p className="donation-innerbox__tableheads--titles">Amount</p>
         <p className="donation-innerbox__tableheads--titles">Expires On</p>
+        <p className="donation-innerbox__tableheads--titles">Restaurant</p>
         <div className="donation-innerbox__tableheads--icon">
           <BiFoodMenu />
         </div>
