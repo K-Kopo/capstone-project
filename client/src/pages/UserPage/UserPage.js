@@ -13,6 +13,7 @@ class UserPage extends Component {
   state = {
     loggedIn: false,
     userData: [],
+    allUsers: [],
   };
 
   handleAuthFail = () => {
@@ -42,7 +43,14 @@ class UserPage extends Component {
             userData: res.data,
           });
         })
+
         .catch(() => this.handleAuthFail());
+
+      axios.get(`${dbUrl}/users`).then((response) => {
+        this.setState({
+          allUsers: response.data,
+        });
+      });
     }
   }
 
@@ -71,6 +79,7 @@ class UserPage extends Component {
             userdata={userData}
             deleteDonation={() => this.deleteDonation()}
             logout={this.logOut}
+            allUsers={this.state.allUsers}
           />
         )}
       </div>

@@ -13,6 +13,7 @@ const Header = () => {
         <Link className="header__home" to="#">
           <FaBars className="header__bars" onClick={showSidebar} />
         </Link>
+       <Link to="/" ><p className="header__title">Second Helpings</p></Link>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu__items" onClick={showSidebar}>

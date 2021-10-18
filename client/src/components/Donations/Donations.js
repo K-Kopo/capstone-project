@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 import DonationsHeader from "../DonationsHeader/DonationsHeader";
 import "./Donations.scss";
 
-const Donations = ({ userdata, history, logout }) => {
+const Donations = ({ userdata, history, logout, allUsers }) => {
   const PORT = process.env.PORT || 5000;
   const dbUrl = `http://localhost:${PORT}`;
 
@@ -28,7 +28,7 @@ const Donations = ({ userdata, history, logout }) => {
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
-  }, [shouldRefresh, openDeleteModal]);
+  }, [shouldRefresh, openDeleteModal, dbUrl]);
 
   const deleteDonation = () => {
     axios
@@ -60,6 +60,15 @@ const Donations = ({ userdata, history, logout }) => {
   const eachDonations = userDonations.filter(
     (donation) => donation.user_id === userdata.id
   );
+
+
+  const restId = userDonations.filter(donation => donation.user_id === allUsers.id)
+  console.log(eachDonations);
+  console.log(allUsers);
+  console.log(restId);
+  // const restName = restId.filter(user => eachDonations.user_id === user.id)
+  // console.log(restName);
+  // const donationsID = eachDonations.filter(donation => donation.user_id === )
   return isLoading ? (
     <p>patience is a virtue</p>
   ) : (

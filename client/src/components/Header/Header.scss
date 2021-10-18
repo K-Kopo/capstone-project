@@ -8,7 +8,7 @@
   font-family: "Oswald";
   display: flex;
   width: 100vw;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   background-color: white;
   height: 6rem;
@@ -16,7 +16,11 @@
   border-bottom: 2px solid $primary_red;
   padding-left: 2rem;
   &__home {
-    background-size: 4rem;
+    margin-right: 2rem;
+  }
+  &__title {
+    color: $primary-black-chocolate;
+    font-size: 1.5rem;
   }
 }
 .menu-bars {
@@ -43,18 +47,19 @@
       width: 100%;
       height: 5rem;
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
     }
     &--bars {
       margin-left: 4rem;
       font-size: 2rem;
       background: none;
+      margin-right: 4rem;
     }
     &--text {
       font-family: "Oswalk", sans-serif;
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
       padding: 0.5rem 0rem 0.5rem 3.25rem;
       list-style: none;
@@ -69,7 +74,7 @@
 .nav-text {
   font-family: "Oswalk", sans-serif;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 0.5rem 0rem 0.5rem 1rem;
   list-style: none;
@@ -90,6 +95,7 @@
 
 a {
   text-decoration: none;
+  
   &:visited {
     color: $footer_yellow;
   }

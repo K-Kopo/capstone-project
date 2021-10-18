@@ -1,6 +1,5 @@
 import React from "react";
 import "./HomePage.scss";
-import { Link } from "react-router-dom";
 import PhotoCarousel from "../../components/PhotoCarousel/PhotoCarousel"
 import LogInButton from "../../components/LogInButton/LogInButton";
 import SignUpButton from "../../components/SignUpButton/SignUpButton";

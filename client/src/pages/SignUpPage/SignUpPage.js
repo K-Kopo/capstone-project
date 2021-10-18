@@ -14,7 +14,7 @@ const SignUpPage = ({ history }) => {
   });
   const [isValid, setIsValid] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -66,13 +66,13 @@ const SignUpPage = ({ history }) => {
           setOpenModal(true);
         })
         .catch((error) => {
-          setErrorMessage(error.data.message);
+          console.log(error.data.message);
         });
     }
   };
   return (
     <div className="signUp">
-      {submitted && isValid && openModal ? (
+      {submitted && isValid && openModal && !loggedIn ? (
         <LogInModal closeModal={setOpenModal} />
       ) : null}
       <h1 className="signUp__title">Please fill out the form below</h1>
