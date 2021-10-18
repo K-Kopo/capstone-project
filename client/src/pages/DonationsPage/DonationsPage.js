@@ -4,6 +4,7 @@ import "./DonationsPage.scss";
 import LogInButton from "../../components/LogInButton/LogInButton";
 import { SiAddthis } from "react-icons/si";
 import DonationsHeader from "../../components/DonationsHeader/DonationsHeader";
+import AddDonationModal from "../../components/AddDonationModal/AddDonationModal";
 
 const PORT = process.env.PORT || 5000;
 const dbUrl = `http://localhost:${PORT}`;
@@ -13,6 +14,8 @@ const DonationsPage = ({ match, history }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
   const [addDonation, setAddDonation] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+  const [currentDonation, setCurrentDonation] = useState(null)
 
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
@@ -40,19 +43,25 @@ const DonationsPage = ({ match, history }) => {
   const handleOnSubmit = (event) => {
     event.preventDefault();
 
-    const id = event.target.id.value;
+    const id = currentDonation.id;
     axios
-      .put(`${dbUrl}/donations/${id}`, {
-        type: event.target.type.value,
-        user_id: match.params.id,
-        description: event.target.description.value,
-        amount: event.target.amount.value,
-        expires: event.target.expires.value,
-      })
+      .put(`${dbUrl}/donations/${id}`, currentDonation)
       .then((response) =>
-        addDonation ? setAddDonation(false) : setAddDonation(true)
+        addDonation ? setAddDonation(false) : setAddDonation(true) , setAddModal(false)
       )
       .catch((error) => console.log(error));
+  };
+  const openAddModal = (event) => {
+    event.preventDefault();
+    setCurrentDonation({ id: event.target.id.value, type: event.target.type.value,
+      user_id: match.params.id,
+      description: event.target.description.value,
+      amount: event.target.amount.value,
+      expires: event.target.expires.value });
+      setAddModal(true);
+  }
+  const closeAddModal = () => {
+    setAddModal(false)
   };
   const logOut = () => {
     sessionStorage.removeItem("authToken");
@@ -124,7 +133,7 @@ const DonationsPage = ({ match, history }) => {
           return (
             <form
               className="donations-form"
-              onSubmit={handleOnSubmit}
+              onSubmit={(event)=>openAddModal(event)}
               key={donation.id}
             >
               <input
@@ -166,6 +175,7 @@ const DonationsPage = ({ match, history }) => {
           Logout
         </button>
       </div>
+        {addModal && (<AddDonationModal closeAddModal={closeAddModal} handleOnSubmit={handleOnSubmit}/>)}
     </div>
   );
 };
