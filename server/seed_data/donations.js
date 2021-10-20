@@ -6,7 +6,8 @@ module.exports = [
     description: "lamb empanadas",
     amount: "20",
     available: 1,
-    expires: "2021-10-12"
+    expires: "2021-10-12",
+    rest_name: "Stein's Deli"
 },
 {
     id: 2,
@@ -15,7 +16,9 @@ module.exports = [
     description: "heads of cabbage",
     amount: "12",
     available: 1,
-    expires: "2021-10-15"
+    expires: "2021-10-15",
+    rest_name: "Turkey & the Wolf"
+
 },
 {
     id: 3,
@@ -24,7 +27,9 @@ module.exports = [
     description: "meat pies",
     amount: "15",
     available: 1,
-    expires: "2021-10-25"
+    expires: "2021-10-25",
+    rest_name: "Piece of Meat"
+
 },
 {
     id: 4,
@@ -33,7 +38,9 @@ module.exports = [
     description: "blocks of cheddar cheese",
     amount: "13",
     available: 1,
-    expires: "2021-10-23"
+    expires: "2021-10-23",
+    rest_name: "Dick & Jenny's"
+
 },
 {
     id: 5,
@@ -42,7 +49,9 @@ module.exports = [
     description: "carrots",
     amount: "10lbs",
     available: 1,
-    expires: "2021-10-23"
+    expires: "2021-10-23",
+    rest_name: "Pho Bang"
+
 },
 {
     id: 6,
@@ -51,6 +60,8 @@ module.exports = [
     description: "celery",
     amount: "5lbs",
     available: 1,
-    expires: "2021-10-23"
+    expires: "2021-10-23",
+    rest_name: "Pizza Delicious"
+
 }
 ];
