@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import axios from "axios";
 import "../../components/DonationModal./DonationModal.scss";
@@ -5,8 +6,10 @@ import "./UserPage.scss";
 
 import Donations from "../../components/Donations/Donations";
 import LogInButton from "../../components/LogInButton/LogInButton";
+const dotenv = require("dotenv")
 
-const PORT = process.env.PORT || 5000;
+dotenv.config()
+const PORT = 8000;
 const dbUrl = `http://localhost:${PORT}`;
 
 class UserPage extends Component {

@@ -27,7 +27,7 @@ const LogInModal = ({ closeModal }) => {
     setSubmitted(true);
     if (values.username && values.password)
       axios
-        .post("http://localhost:5000/users/login", {
+        .post("http://localhost:8000/users/login", {
           ...values,
         })
         .then((res) => {
@@ -53,7 +53,7 @@ const LogInModal = ({ closeModal }) => {
       setLoggedIn(true);
     }
     axios
-      .get("http://localhost:5000/users")
+      .get("http://localhost:8000/users")
       .then((response) => {
         if (isSubscribed) return setUserData(response.data);
       })

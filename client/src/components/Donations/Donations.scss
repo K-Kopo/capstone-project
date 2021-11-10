@@ -2,21 +2,38 @@
 @import "../../Styles/partials/mixins";
 @import "../../Styles/partials/variables";
 
-
 .donation {
-    @include resets;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $primary_green;
-    height: 100vh;
+  @include resets;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary_green;
+  height: 100vh;
+  &-tablebox {
+    background-color: whitesmoke;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0px 2px 5px rgb(0 0 0 / 20%);
+    border: rgb(0 0 0 / 20%);
+    border-radius: 5px;
   }
+  &-table {
+    table-layout: fixed;
+    width: 75vw;
+    background-color: whitesmoke;
+
+    &__row {
+      width: 75px;
+      color: $primary-black-chocolate;
+    }
+  }
+}
 
 .donation-box {
-    height: 100%;
-    padding-bottom: 2rem;
-    width: auto;
-    &__title {
-        color: $primary-black-chocolate;
-    }
+  height: 100%;
+  padding-bottom: 2rem;
+  width: auto;
+  &__title {
+    color: $primary-black-chocolate;
+  }
 }

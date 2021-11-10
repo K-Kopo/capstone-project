@@ -8,7 +8,7 @@ import DonationsHeader from "../DonationsHeader/DonationsHeader";
 import "./Donations.scss";
 
 const Donations = ({ userdata, history, logout, allUsers }) => {
-  const PORT = process.env.PORT || 5000;
+  const PORT = process.env.PORT || 8000;
   const dbUrl = `http://localhost:${PORT}`;
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -32,7 +32,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
 
   const deleteDonation = () => {
     axios
-      .delete(`http://localhost:5000/donations/${currentDonationId}`)
+      .delete(`http://localhost:8000/donations/${currentDonationId}`)
       .then((response) => console.log(response), setOpenDeleteModal(false))
 
       .catch((error) => console.log(error));
@@ -75,50 +75,63 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
     <div className="donation">
       <div className="donation-box">
         <h1 className="donation-box__title">Welcome back, {userdata.name}</h1>
+        <div className="donation-tablebox">
+        <table className = "donation-table">
         <DonationsHeader />
 
         {eachDonations.map((donation) => {
           return (
-            <form
-              className="rest-donation"
-              onSubmit={(event) => deleteModalOpen(event, donation.id)}
-              key={donation.id}
-            >
-              <input
-                className="rest-donation__item--hidden"
-                name="id"
-                value={donation.id}
-                readOnly
-              />
-              <input
-                className="rest-donation__item"
-                name="type"
-                value={donation.type}
-                readOnly
-              />
-              <input
-                className="rest-donation__item"
-                name="description"
-                value={donation.description}
-                readOnly
-              />
-              <input
-                className="rest-donation__item"
-                name="amount"
-                value={donation.amount}
-                readOnly
-              />
-              <input
-                className="rest-donation__item"
-                name="expires"
-                defaultValue={jsDate(donation.expires)}
-              />
+            <tr className = "donation-table__row" key={donation.id}>
+              <td className="donation-table__item">{donation.type}</td>
+              <td  className="donation-table__item">{donation.description}</td>
+              <td className="donation-table__item">{donation.amount}</td>
+              <td className="donation-table__item">{jsDate(donation.expires)}</td>
               <button className="rest-donation__item--delete" type="submit">
-                <AiTwotoneDelete />
-              </button>
-            </form>
-          );
-        })}
+                 <AiTwotoneDelete />
+             </button>
+            </tr>
+            // <form
+            //   className="rest-donation"
+            //   onSubmit={(event) => deleteModalOpen(event, donation.id)}
+            //   key={donation.id}
+            // >
+            //   <input
+            //     className="rest-donation__item--hidden"
+            //     name="id"
+            //     value={donation.id}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="type"
+            //     value={donation.type}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="description"
+            //     value={donation.description}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="amount"
+            //     value={donation.amount}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="expires"
+            //     defaultValue={jsDate(donation.expires)}
+            //   />
+            //   <button className="rest-donation__item--delete" type="submit">
+            //     <AiTwotoneDelete />
+            //   </button>
+            // </form>
+            );
+          })}
+          </table>
+          </div>
         {openDeleteModal && (
           <DeleteModal
             closeDeleteModal={closeDeleteModal}

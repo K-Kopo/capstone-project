@@ -6,7 +6,7 @@ import { SiAddthis } from "react-icons/si";
 import DonationsHeader from "../../components/DonationsHeader/DonationsHeader";
 import AddDonationModal from "../../components/AddDonationModal/AddDonationModal";
 
-const PORT = process.env.PORT || 5000;
+const PORT = 8000;
 const dbUrl = `http://localhost:${PORT}`;
 
 const DonationsPage = ({ match, history }) => {
