@@ -10,7 +10,7 @@ const DonationsHeader = () => {
         <th className="donation-tablehead__titles">Description</th>
         <th className="donation-tablehead__titles">Amount</th>
         <th className="donation-tablehead__titles">Expires On</th>
-        <th className="donation-tablehead__titles">Restaurant</th>
+        {/* <th className="donation-tablehead__titles">Restaurant</th> */}
         <th className="donation-innerbox__tableheads--icon">
           <BiFoodMenu />
         </th>

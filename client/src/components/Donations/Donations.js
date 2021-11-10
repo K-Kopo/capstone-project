@@ -33,13 +33,13 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
   const deleteDonation = () => {
     axios
       .delete(`http://localhost:8000/donations/${currentDonationId}`)
-      .then((response) => console.log(response), setOpenDeleteModal(false))
+      .then((response) => console.log(response.data.message), setOpenDeleteModal(false), refresh())
 
       .catch((error) => console.log(error));
   };
 
-  const deleteModalOpen = (event, donationId) => {
-    event.preventDefault();
+  const deleteModalOpen = (donationId) => {
+    // event.preventDefault();
     setCurrentDonationId(donationId);
     setOpenDeleteModal(true);
   };
@@ -74,7 +74,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
   ) : (
     <div className="donation">
       <div className="donation-box">
-        <h1 className="donation-box__title">Welcome back, {userdata.name}</h1>
+        <h1 className="donation-box__title">Welcome back! {userdata.name}</h1>
         <div className="donation-tablebox">
         <table className = "donation-table">
         <DonationsHeader />
@@ -86,7 +86,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
               <td  className="donation-table__item">{donation.description}</td>
               <td className="donation-table__item">{donation.amount}</td>
               <td className="donation-table__item">{jsDate(donation.expires)}</td>
-              <button className="rest-donation__item--delete" type="submit">
+              <button className="rest-donation__item--delete" onClick={()=>deleteModalOpen(donation.id)}>
                  <AiTwotoneDelete />
              </button>
             </tr>

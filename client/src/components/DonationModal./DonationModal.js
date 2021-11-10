@@ -31,18 +31,18 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
   };
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    setSubmitted(true);
+    
     if (values.description && values.amount && values.type && values.expires) {
       setIsValid(true);
     }
     axios
-      .post("http://localhost:5000/donations", {
+      .post("http://localhost:8000/donations", {
         user_id: userData.id,
         ...values,
       })
-      .then((response) => {
-        console.log(response);
-      })
+      .then((response) => 
+        console.log(response), setSubmitted(true)
+      )
       .catch((error) => {
         console.log(error);
       });

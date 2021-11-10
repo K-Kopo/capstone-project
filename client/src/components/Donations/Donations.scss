@@ -10,6 +10,9 @@
   background-color: $primary_green;
   height: 100vh;
   &-tablebox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: whitesmoke;
     padding: 2rem;
     margin-bottom: 2rem;
@@ -18,13 +21,16 @@
     border-radius: 5px;
   }
   &-table {
-    table-layout: fixed;
+    table-layout: auto;
     width: 75vw;
     background-color: whitesmoke;
 
     &__row {
-      width: 75px;
+    //   width: 75px;
       color: $primary-black-chocolate;
+    }
+    &__item {
+      padding: 0.5rem 0;
     }
   }
 }
