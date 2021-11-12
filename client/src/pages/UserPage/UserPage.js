@@ -6,7 +6,7 @@ import "./UserPage.scss";
 import Donations from "../../components/Donations/Donations";
 import LogInButton from "../../components/LogInButton/LogInButton";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 const dbUrl = `http://localhost:${PORT}`;
 
 class UserPage extends Component {

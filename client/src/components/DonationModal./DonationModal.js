@@ -35,7 +35,7 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
       setIsValid(true);
     }
     axios
-      .post("http://localhost:5000/donations", {
+      .post("http://localhost:8000/donations", {
         user_id: userData.id,
         ...values,
       })

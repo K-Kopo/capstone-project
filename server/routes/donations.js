@@ -18,7 +18,7 @@ router
             });
     })
     .put((req, res) => {
-   
+        console.log(req.body)
         Donation.where({ id: req.params.id })
             .fetch()
             .then((donation) => {

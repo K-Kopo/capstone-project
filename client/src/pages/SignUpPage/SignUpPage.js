@@ -56,7 +56,7 @@ const SignUpPage = ({ history }) => {
     ) {
       setIsValid(true);
       axios
-        .post("http://localhost:5000/users/signup", {
+        .post("http://localhost:8000/users/signup", {
           ...values,
         })
         .then((res) => {
