@@ -6,6 +6,8 @@ import DonationModal from "../../components/DonationModal./DonationModal";
 import { useHistory } from "react-router";
 import DonationsHeader from "../DonationsHeader/DonationsHeader";
 import "./Donations.scss";
+const dotenv = require("dotenv");
+dotenv.config();
 
 const Donations = ({ userdata, history, logout, allUsers }) => {
   
@@ -60,7 +62,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
     shouldRefresh ? setShouldRefresh(false) : setShouldRefresh(true);
   };
   const jsDate = (date) => {
-    return new Date(date).toISOString().slice(0, 10);
+    return new Date(date).toLocaleDateString().slice(0, 10);
   };
 
   const eachDonations = userDonations.filter(
@@ -73,14 +75,18 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
   ) : (
     <div className="donation">
       <div className="donation-box">
+        <div className="donation-box__dashboard">
         <h1 className="donation-box__title">Welcome back! {userdata.name}</h1>
+        </div>
         <div className="donation-tablebox">
           <table className="donation-table">
             <DonationsHeader />
 
             {eachDonations.map((donation) => {
               return (
-                <tr className="donation-table__row" key={donation.id}>
+                <tbody key={donation.id}>
+                <tr className="donation-table__row" >
+                  <td className="donation-table__item">{donation.rest_name}</td>
                   <td className="donation-table__item">{donation.type}</td>
                   <td className="donation-table__item">
                     {donation.description}
@@ -89,13 +95,14 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
                   <td className="donation-table__item">
                     {jsDate(donation.expires)}
                   </td>
-                  <button
+                  <td
                     className="rest-donation__item--delete"
                     onClick={() => deleteModalOpen(donation.id)}
                   >
                     <AiTwotoneDelete />
-                  </button>
+                  </td>
                 </tr>
+                </tbody>
               );
             })}
           </table>
@@ -119,7 +126,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
               className="donation-box__donationbtn"
               onClick={() => history.push(`/donations/${userdata.id}`)}
             >
-              Browse current donations
+              Browse available donations
             </button>
           )}
           {openModal && (

@@ -40,6 +40,10 @@
   }
   &__donationbtn {
     @include button-style;
+    &:hover {
+      background-color: $primary_green;
+      color: whitesmoke;
+    }
   }
   &__btnbox {
     display: flex;
@@ -72,6 +76,11 @@
     }
     &--delete {
       color: $primary_red;
+      background-color: whitesmoke;
+      border: none;
+    }
+    &--add {
+      color: $primary_green;
       background-color: whitesmoke;
       border: none;
     }
