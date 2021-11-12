@@ -46,8 +46,14 @@ const DonationsPage = ({ match, history }) => {
     const id = currentDonation.id;
     console.log(currentDonation);
     axios
-      .put(`${dbUrl}/donations/${id}`, currentDonation)
-      .then(() =>
+      .put(`${dbUrl}/donations/${id}`, {
+        type: currentDonation.type,
+        user_id: match.params.id,
+        description: currentDonation.description,
+        amount: currentDonation.amount,
+        expires: jsDate(currentDonation.expires)
+      })
+      .then((response) =>
         addDonation ? setAddDonation(false) : setAddDonation(true) , setAddModal(false)
       )
       .catch((error) => console.log(error));

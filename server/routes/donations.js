@@ -18,13 +18,13 @@ router
             });
     })
     .put((req, res) => {
-        console.log(req.params.id)
+        console.log(req.body)
         Donation.where({ id: req.params.id })
             .fetch()
             .then((donation) => {
                 donation
                     .save({
-                        rest_name: req.body.rest_name,
+                        
                         description: req.body.description,
                         user_id: req.body.user_id,
                         amount: req.body.amount,
