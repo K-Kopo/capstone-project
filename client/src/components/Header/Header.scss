@@ -8,7 +8,7 @@
   font-family: "Oswald";
   display: flex;
   width: 100vw;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
   height: 6rem;
@@ -23,10 +23,13 @@
     font-size: 1.5rem;
   }
 }
-.menu-bars {
+.header__bars {
   margin-left: 4rem;
   font-size: 2rem;
   background: none;
+}
+.header__bars.hidden {
+  display: none;
 }
 .nav-menu {
   background-color: white;
@@ -36,16 +39,15 @@
   justify-content: center;
   position: fixed;
   top: 0;
-  left: -100%;
-  transition: 850ms;
-  border: 2px solid $primary_red;
+  right: -100%;
   &__items {
+    display: flex;
     width: 100%;
     padding: 0;
     &--toggle {
       background-color: white;
       width: 100%;
-      height: 5rem;
+      height: 4rem;
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -68,8 +70,9 @@
   }
 }
 .nav-menu.active {
-  left: 0;
-  transition: 350ms;
+  right: 450px;
+  transition: 100ms;
+  height: 0;
 }
 .nav-text {
   font-family: "Oswalk", sans-serif;

@@ -4,6 +4,11 @@ import "./DonationsPage.scss";
 import LogInButton from "../../components/LogInButton/LogInButton";
 import { SiAddthis } from "react-icons/si";
 import DonationsHeader from "../../components/DonationsHeader/DonationsHeader";
+import AddDonationModal from "../../components/AddDonationModal/AddDonationModal";
+import "../../components/Donations/Donations.scss";
+
+const dotenv = require("dotenv");
+dotenv.config();
 
 const PORT = process.env.PORT || 8000;
 const dbUrl = `http://localhost:${PORT}`;
@@ -13,6 +18,8 @@ const DonationsPage = ({ match, history }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState([]);
   const [addDonation, setAddDonation] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+  const [currentDonation, setCurrentDonation] = useState(null);
 
   useEffect(() => {
     const authToken = sessionStorage.getItem("authToken");
@@ -37,22 +44,29 @@ const DonationsPage = ({ match, history }) => {
       .catch((error) => console.log(error));
   }, [addDonation]);
 
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
-
-    const id = event.target.id.value;
+  const handleOnSubmit = () => {
+    const id = currentDonation.id;
     axios
       .put(`${dbUrl}/donations/${id}`, {
-        type: event.target.type.value,
+        type: currentDonation.type,
         user_id: match.params.id,
-        description: event.target.description.value,
-        amount: event.target.amount.value,
-        expires: event.target.expires.value,
+        description: currentDonation.description,
+        amount: currentDonation.amount,
+        expires: sqlDate(currentDonation.expires),
       })
-      .then((response) =>
-        addDonation ? setAddDonation(false) : setAddDonation(true)
+      .then(
+        (response) =>
+          addDonation ? setAddDonation(false) : setAddDonation(true),
+        setAddModal(false)
       )
       .catch((error) => console.log(error));
+  };
+  const openAddModal = (donation) => {
+    setCurrentDonation({ ...donation, user_id: match.params.id });
+    setAddModal(true);
+  };
+  const closeAddModal = () => {
+    setAddModal(false);
   };
   const logOut = () => {
     sessionStorage.removeItem("authToken");
@@ -66,9 +80,12 @@ const DonationsPage = ({ match, history }) => {
         <LogInButton />
       </div>
     );
-
-  const jsDate = (date) => {
+  
+  const sqlDate = (date) => {
     return new Date(date).toISOString().slice(0, 10);
+  }
+  const jsDate = (date) => {
+    return new Date(date).toLocaleDateString().slice(0, 10);
   };
   const filteredDonations = donationsData.filter(
     (donation) => donation.user_id !== userData.id && donation.available !== 0
@@ -80,92 +97,74 @@ const DonationsPage = ({ match, history }) => {
   return (
     <div className="donations">
       <div className="donations-box">
-        <h1>Hello again, {userData.name}!</h1>
+        <div className="donation-box__dashboard">
+        <h1 className="donation-box__title">Welcome back! {userData.name}</h1>
+        </div>
         <h2 className="donations-box__title">My Current Donations</h2>
-        <DonationsHeader />
-        {myDonations.map((donation) => {
-          return (
-            <form className="donations-form" key={donation.id}>
-              <input
-                className="donations-form__hidden"
-                name="id"
-                value={donation.id}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="type"
-                value={donation.type}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="description"
-                value={donation.description}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="amount"
-                value={donation.amount}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="expires"
-                value={jsDate(donation.expires)}
-              ></input>
-            </form>
-          );
-        })}
+        <div className="donation-tablebox">
+          <table className="donation-table">
+            <DonationsHeader />
+
+            {myDonations.map((donation) => {
+              return (
+                <tbody key={donation.id}>
+                <tr className="donation-table__row" >
+                  <td className="donation-table__item">{donation.rest_name}</td>
+                  <td className="donation-table__item">{donation.type}</td>
+                  <td className="donation-table__item">
+                    {donation.description}
+                  </td>
+                  <td className="donation-table__item">{donation.amount}</td>
+                  <td className="donation-table__item">
+                    {jsDate(donation.expires)}
+                  </td>
+                  {/* <button className="rest-donation__item--delete" onClick={()=>deleteModalOpen(donation.id)}>
+                 <AiTwotoneDelete />
+             </button> */}
+                </tr>
+                </tbody>
+              );
+            })}
+          </table>
+        </div>
         <h2 className="donations-box__title">Available Donations</h2>
-        <DonationsHeader />
-        {filteredDonations.map((donation) => {
-          return (
-            <form
-              className="donations-form"
-              onSubmit={handleOnSubmit}
-              key={donation.id}
-            >
-              <input
-                className="donations-form__hidden"
-                name="id"
-                value={donation.id}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="type"
-                value={donation.type}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="description"
-                value={donation.description}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="amount"
-                value={donation.amount}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="expires"
-                defaultValue={jsDate(donation.expires)}
-              ></input>
-              <button className="donations-form__input" type="submit">
-                <SiAddthis />
-              </button>
-            </form>
-          );
-        })}
+        <div className="donation-tablebox">
+          <table className="donation-table">
+            <DonationsHeader />
+
+            {filteredDonations.map((donation) => {
+              return (
+                <tr className="donation-table__row" key={donation.id}>
+                  <td className="donation-table__item">{donation.rest_name}</td>
+                  <td className="donation-table__item">{donation.type}</td>
+                  <td className="donation-table__item">
+                    {donation.description}
+                  </td>
+                  <td className="donation-table__item">{donation.amount}</td>
+                  <td className="donation-table__item">
+                    {jsDate(donation.expires)}
+                  </td>
+                  <td
+                    className="rest-donation__item--add"
+                    onClick={() => openAddModal(donation)}
+                  >
+                    <SiAddthis />
+                  </td>
+                </tr>
+              );
+            })}
+          </table>
+        </div>
         <button className="donations-form__btn" onClick={() => logOut()}>
           Logout
         </button>
       </div>
+      {addModal && (
+        <AddDonationModal
+          closeAddModal={closeAddModal}
+          handleOnSubmit={handleOnSubmit}
+        />
+      )}
     </div>
   );
 };

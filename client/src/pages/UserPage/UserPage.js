@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import axios from "axios";
 import "../../components/DonationModal./DonationModal.scss";
@@ -5,8 +6,10 @@ import "./UserPage.scss";
 
 import Donations from "../../components/Donations/Donations";
 import LogInButton from "../../components/LogInButton/LogInButton";
+const dotenv = require("dotenv")
 
-const PORT = process.env.PORT || 8000;
+dotenv.config()
+const PORT = 8000;
 const dbUrl = `http://localhost:${PORT}`;
 
 class UserPage extends Component {
@@ -64,7 +67,7 @@ class UserPage extends Component {
   };
 
   render() {
-    const { loggedIn, userData } = this.state;
+    const { loggedIn, userData, allUsers } = this.state;
 
     return (
       <div>
@@ -79,7 +82,7 @@ class UserPage extends Component {
             userdata={userData}
             deleteDonation={() => this.deleteDonation()}
             logout={this.logOut}
-            allUsers={this.state.allUsers}
+            allUsers={allUsers}
           />
         )}
       </div>

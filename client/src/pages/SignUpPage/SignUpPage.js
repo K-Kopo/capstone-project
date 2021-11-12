@@ -3,6 +3,12 @@ import "./SignUpPage.scss";
 import axios from "axios";
 import LogInModal from "../../components/LogInModal/LogInModal";
 
+const dotenv = require("dotenv")
+dotenv.config()
+
+const PORT = process.env.PORT || 8000;
+const dbUrl = `http://localhost:${PORT}`;
+
 const SignUpPage = ({ history }) => {
   const [values, setValues] = useState({
     name: "",
@@ -56,7 +62,7 @@ const SignUpPage = ({ history }) => {
     ) {
       setIsValid(true);
       axios
-        .post("http://localhost:8000/users/signup", {
+        .post(`${dbUrl}/users/signup`, {
           ...values,
         })
         .then((res) => {

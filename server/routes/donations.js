@@ -82,7 +82,8 @@ router
                     amount: req.body.amount,
                     available: 1,
                     type: req.body.type,
-                    expires: req.body.expires
+                    expires: req.body.expires,
+                    rest_name: req.body.name
                 })
                     .save()
                     .then((newDonation) => {

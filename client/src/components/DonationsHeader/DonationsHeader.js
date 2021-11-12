@@ -4,17 +4,18 @@ import "./DonationsHeader.scss";
 
 const DonationsHeader = () => {
   return (
-    <div className="donation-innerbox">
-      <div className="donation-innerbox__tableheads">
-        <p className="donation-innerbox__tableheads--titles">Type</p>
-        <p className="donation-innerbox__tableheads--titles">Description</p>
-        <p className="donation-innerbox__tableheads--titles">Amount</p>
-        <p className="donation-innerbox__tableheads--titles">Expires On</p>
-        <div className="donation-innerbox__tableheads--icon">
+    <thead className="donation-tablehead">
+      <tr className="donation-tablehead__row">
+        <th className="donation-tablehead__titles">Restaurant</th>
+        <th className="donation-tablehead__titles">Type</th>
+        <th className="donation-tablehead__titles">Description</th>
+        <th className="donation-tablehead__titles">Amount</th>
+        <th className="donation-tablehead__titles">Expires On</th>
+        <th className="donation-innerbox__tableheads--icon">
           <BiFoodMenu />
-        </div>
-      </div>
-    </div>
+        </th>
+      </tr>
+    </thead>
   );
 };
 

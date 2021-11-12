@@ -7,7 +7,7 @@ module.exports = [
     amount: "20",
     available: 1,
     expires: "2021-10-12",
-    rest_name: "Stein's Deli"
+    rest_name: "Turkey and the Wolf"
 },
 {
     id: 2,
@@ -17,7 +17,7 @@ module.exports = [
     amount: "12",
     available: 1,
     expires: "2021-10-15",
-    rest_name: "Turkey & the Wolf"
+    rest_name: "Stein's Deli"
 
 },
 {
@@ -29,7 +29,6 @@ module.exports = [
     available: 1,
     expires: "2021-10-25",
     rest_name: "Piece of Meat"
-
 },
 {
     id: 4,
@@ -39,8 +38,7 @@ module.exports = [
     amount: "13",
     available: 1,
     expires: "2021-10-23",
-    rest_name: "Dick & Jenny's"
-
+    rest_name: "Big Cheesy"
 },
 {
     id: 5,
@@ -50,8 +48,7 @@ module.exports = [
     amount: "10lbs",
     available: 1,
     expires: "2021-10-23",
-    rest_name: "Pho Bang"
-
+    rest_name: "Bahn Mi Boys"
 },
 {
     id: 6,
@@ -61,7 +58,6 @@ module.exports = [
     amount: "5lbs",
     available: 1,
     expires: "2021-10-23",
-    rest_name: "Pizza Delicious"
-
+    rest_name: "Parkway Bakery"
 }
 ];

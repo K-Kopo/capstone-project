@@ -2,21 +2,55 @@
 @import "../../Styles/partials/mixins";
 @import "../../Styles/partials/variables";
 
-
 .donation {
-    @include resets;
+  @include resets;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary_green;
+  height: 100vh;
+  width: 100vw;
+
+  &-tablebox {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $primary_green;
-    height: 100vh;
+    background-color: whitesmoke;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0px 2px 5px rgb(0 0 0 / 20%);
+    border: rgb(0 0 0 / 20%);
+    border-radius: 5px;
   }
+  &-table {
+    table-layout: auto;
+    width: 75vw;
+    background-color: whitesmoke;
+
+    &__row {
+      color: $primary-black-chocolate;
+    }
+    &__item {
+      padding: 0.5rem 0;
+    }
+  }
+}
 
 .donation-box {
-    height: 100%;
-    padding-bottom: 2rem;
-    width: auto;
-    &__title {
-        color: $primary-black-chocolate;
-    }
+  height: 100%;
+  padding-bottom: 2rem;
+  width: auto;
+  &__title {
+    color: $primary-black-chocolate;
+  }
+  &__dashboard {
+    background-color: whitesmoke;
+    box-shadow: 0px 2px 5px rgb(0 0 0 / 20%);
+    margin: 2rem 0;
+    padding: 0 2rem;
+    border-radius: 5px;
+    align-self: self-start;
+
+
+  }
 }

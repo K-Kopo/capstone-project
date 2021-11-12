@@ -3,12 +3,19 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./DonationModal.scss";
 
+const dotenv = require("dotenv")
+dotenv.config()
+
+const PORT = process.env.PORT || 8000;
+const dbUrl = `http://localhost:${PORT}`;
+
 const DonationModal = ({ userData, closeModal, refreshPage }) => {
   const [values, setValues] = useState({
     type: "",
     description: "",
     amount: "",
     expires: "",
+    name: userData.name,
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -30,18 +37,18 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
   };
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    setSubmitted(true);
+    
     if (values.description && values.amount && values.type && values.expires) {
       setIsValid(true);
     }
     axios
-      .post("http://localhost:8000/donations", {
+      .post(`${dbUrl}/donations`, {
         user_id: userData.id,
         ...values,
       })
-      .then((response) => {
-        console.log(response);
-      })
+      .then((response) => 
+        console.log(response), setSubmitted(true)
+      )
       .catch((error) => {
         console.log(error);
       });

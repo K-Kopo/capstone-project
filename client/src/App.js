@@ -9,6 +9,8 @@ import Footer from "./components/Footer/Footer";
 import Donations from "./components/Donations/Donations";
 import AboutPage from "./pages/AboutPage/AboutPage";
 
+
+
 function App() {
   return (
     <Router>

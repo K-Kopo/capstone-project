@@ -28,3 +28,14 @@
       }
     }
 }
+.donation-tablehead {
+  &__row {
+    border-bottom: 2px solid $primary_red;
+  }
+  &__titles {
+    text-align: left;
+    color: $primary-black-chocolate;
+    border-bottom: 2px solid $primary_red;
+
+  }
+}

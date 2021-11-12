@@ -1,0 +1,50 @@
+@import "../../Styles/partials/variables";
+@import "../../Styles/partials/mixins";
+
+.add-modal{
+    height: 25vh;
+    width: 25vw;
+    display: flex;
+    background-color: white ;
+    position: fixed;
+    justify-content: space-between;
+    flex-direction: column;
+    color: $primary-black-chocolate;
+    top: 25%;
+    right: 35%;
+    border-radius: 10px;
+    padding-bottom: 2rem;
+    &__close {
+        width: 2rem;
+        background-color: white;
+        border: none;
+        margin: 1rem;
+    }
+    &__title {
+        font-size: 1rem;
+        text-align: center;
+        margin: 1rem;
+    }
+    &__footer {
+        display: flex;
+        justify-content: space-around;
+    }
+    &__footer-cancel {
+        @include button-style;
+        height: 2rem;
+        width: 4rem;
+        &:hover {
+            box-shadow:  0 1px 2px rgb(0 0 0 / 15%);
+            transition: opacity .3s ease-in-out;
+            border-color: #bc4749;
+            color: #bc4749;
+          }
+
+    }
+    &__footer-delete {
+        @include button-style;
+        height: 2rem;
+        width: 4rem;
+
+    }
+}

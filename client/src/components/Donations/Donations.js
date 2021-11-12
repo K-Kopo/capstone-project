@@ -6,8 +6,11 @@ import DonationModal from "../../components/DonationModal./DonationModal";
 import { useHistory } from "react-router";
 import DonationsHeader from "../DonationsHeader/DonationsHeader";
 import "./Donations.scss";
+const dotenv = require("dotenv");
+dotenv.config();
 
 const Donations = ({ userdata, history, logout, allUsers }) => {
+  
   const PORT = process.env.PORT || 8000;
   const dbUrl = `http://localhost:${PORT}`;
 
@@ -32,17 +35,21 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
 
   const deleteDonation = () => {
     axios
-      .delete(`http://localhost:${PORT}/donations/${currentDonationId}`)
-      .then((response) => console.log(response), setOpenDeleteModal(false))
+      .delete(`${dbUrl}/donations/${currentDonationId}`)
+      .then(
+        (response) => console.log(response.data.message),
+        setOpenDeleteModal(false),
+        refresh()
+      )
 
       .catch((error) => console.log(error));
   };
 
-  const deleteModalOpen = (event, donationId) => {
-    event.preventDefault();
+  const deleteModalOpen = (donationId) => {
     setCurrentDonationId(donationId);
     setOpenDeleteModal(true);
   };
+
   const closeDeleteModal = () => {
     setOpenDeleteModal(false);
   };
@@ -50,11 +57,12 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
   const openDonationModal = () => {
     setOpenModal(true);
   };
+  
   const refresh = () => {
     shouldRefresh ? setShouldRefresh(false) : setShouldRefresh(true);
   };
   const jsDate = (date) => {
-    return new Date(date).toISOString().slice(0, 10);
+    return new Date(date).toLocaleDateString().slice(0, 10);
   };
 
   const eachDonations = userDonations.filter(
@@ -66,51 +74,38 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
   ) : (
     <div className="donation">
       <div className="donation-box">
-        <h1 className="donation-box__title">Welcome back, {userdata.name}</h1>
-        <DonationsHeader />
+        <div className="donation-box__dashboard">
+        <h1 className="donation-box__title">Welcome back! {userdata.name}</h1>
+        </div>
+        <div className="donation-tablebox">
+          <table className="donation-table">
+            <DonationsHeader />
 
-        {eachDonations.map((donation) => {
-          return (
-            <form
-              className="rest-donation"
-              onSubmit={(event) => deleteModalOpen(event, donation.id)}
-              key={donation.id}
-            >
-              <input
-                className="rest-donation__item--hidden"
-                name="id"
-                value={donation.id}
-                readOnly
-              />
-              <input
-                className="rest-donation__item"
-                name="type"
-                value={donation.type}
-                readOnly
-              />
-              <input
-                className="rest-donation__item"
-                name="description"
-                value={donation.description}
-                readOnly
-              />
-              <input
-                className="rest-donation__item"
-                name="amount"
-                value={donation.amount}
-                readOnly
-              />
-              <input
-                className="rest-donation__item"
-                name="expires"
-                defaultValue={jsDate(donation.expires)}
-              />
-              <button className="rest-donation__item--delete" type="submit">
-                <AiTwotoneDelete />
-              </button>
-            </form>
-          );
-        })}
+            {eachDonations.map((donation) => {
+              return (
+                <tbody key={donation.id}>
+                <tr className="donation-table__row" >
+                  <td className="donation-table__item">{donation.rest_name}</td>
+                  <td className="donation-table__item">{donation.type}</td>
+                  <td className="donation-table__item">
+                    {donation.description}
+                  </td>
+                  <td className="donation-table__item">{donation.amount}</td>
+                  <td className="donation-table__item">
+                    {jsDate(donation.expires)}
+                  </td>
+                  <td
+                    className="rest-donation__item--delete"
+                    onClick={() => deleteModalOpen(donation.id)}
+                  >
+                    <AiTwotoneDelete />
+                  </td>
+                </tr>
+                </tbody>
+              );
+            })}
+          </table>
+        </div>
         {openDeleteModal && (
           <DeleteModal
             closeDeleteModal={closeDeleteModal}
@@ -130,7 +125,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
               className="donation-box__donationbtn"
               onClick={() => history.push(`/donations/${userdata.id}`)}
             >
-              Browse current donations
+              Browse available donations
             </button>
           )}
           {openModal && (
