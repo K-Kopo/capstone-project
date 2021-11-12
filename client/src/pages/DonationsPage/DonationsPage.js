@@ -5,6 +5,7 @@ import LogInButton from "../../components/LogInButton/LogInButton";
 import { SiAddthis } from "react-icons/si";
 import DonationsHeader from "../../components/DonationsHeader/DonationsHeader";
 import AddDonationModal from "../../components/AddDonationModal/AddDonationModal";
+import "../../components/Donations/Donations.scss"
 
 const PORT = 8000;
 const dbUrl = `http://localhost:${PORT}`;
@@ -40,24 +41,21 @@ const DonationsPage = ({ match, history }) => {
       .catch((error) => console.log(error));
   }, [addDonation]);
 
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
+  const handleOnSubmit = () => {
 
     const id = currentDonation.id;
+    console.log(currentDonation);
     axios
       .put(`${dbUrl}/donations/${id}`, currentDonation)
-      .then((response) =>
+      .then(() =>
         addDonation ? setAddDonation(false) : setAddDonation(true) , setAddModal(false)
       )
       .catch((error) => console.log(error));
   };
-  const openAddModal = (event) => {
-    event.preventDefault();
-    setCurrentDonation({ id: event.target.id.value, type: event.target.type.value,
+  const openAddModal = (donation) => {
+    setCurrentDonation({ ...donation,
       user_id: match.params.id,
-      description: event.target.description.value,
-      amount: event.target.amount.value,
-      expires: event.target.expires.value });
+      });
       setAddModal(true);
   }
   const closeAddModal = () => {
@@ -91,99 +89,121 @@ const DonationsPage = ({ match, history }) => {
       <div className="donations-box">
         <h1>Hello again, {userData.name}!</h1>
         <h2 className="donations-box__title">My Current Donations</h2>
+        <div className="donation-tablebox">
+        <table className = "donation-table">
         <DonationsHeader />
+
         {myDonations.map((donation) => {
           return (
-            <form className="donations-form" key={donation.id}>
-              <input
-                className="donations-form__hidden"
-                name="id"
-                value={donation.id}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="type"
-                value={donation.type}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="description"
-                value={donation.description}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="amount"
-                value={donation.amount}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="expires"
-                value={jsDate(donation.expires)}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="rest_name"
-                value={donation.rest_name}
-                readOnly
-              ></input>
-            </form>
-          );
-        })}
+            <tr className = "donation-table__row" key={donation.id}>
+              <td className="donation-table__item">{donation.type}</td>
+              <td  className="donation-table__item">{donation.description}</td>
+              <td className="donation-table__item">{donation.amount}</td>
+              <td className="donation-table__item">{jsDate(donation.expires)}</td>
+              {/* <button className="rest-donation__item--delete" onClick={()=>deleteModalOpen(donation.id)}>
+                 <AiTwotoneDelete />
+             </button> */}
+            </tr>
+            // <form
+            //   className="rest-donation"
+            //   onSubmit={(event) => deleteModalOpen(event, donation.id)}
+            //   key={donation.id}
+            // >
+            //   <input
+            //     className="rest-donation__item--hidden"
+            //     name="id"
+            //     value={donation.id}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="type"
+            //     value={donation.type}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="description"
+            //     value={donation.description}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="amount"
+            //     value={donation.amount}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="expires"
+            //     defaultValue={jsDate(donation.expires)}
+            //   />
+            //   <button className="rest-donation__item--delete" type="submit">
+            //     <AiTwotoneDelete />
+            //   </button>
+            // </form>
+            );
+          })}
+          </table>
+          </div>
         <h2 className="donations-box__title">Available Donations</h2>
+        <div className="donation-tablebox">
+        <table className = "donation-table">
         <DonationsHeader />
+
         {filteredDonations.map((donation) => {
           return (
-            <form
-              className="donations-form"
-              onSubmit={(event)=>openAddModal(event)}
-              key={donation.id}
-            >
-              <input
-                className="donations-form__hidden"
-                name="id"
-                value={donation.id}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="type"
-                value={donation.type}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="description"
-                value={donation.description}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="amount"
-                value={donation.amount}
-                readOnly
-              ></input>
-              <input
-                className="donations-form__input"
-                name="expires"
-                defaultValue={jsDate(donation.expires)}
-              ></input>
-                <input
-                className="donations-form__input"
-                name="rest_name"
-                value={donation.rest_name}
-                readOnly
-              ></input>
-              <button className="donations-form__input" type="submit">
-                <SiAddthis />
-              </button>
-            </form>
-          );
-        })}
+            <tr className = "donation-table__row" key={donation.id}>
+              <td className="donation-table__item">{donation.type}</td>
+              <td  className="donation-table__item">{donation.description}</td>
+              <td className="donation-table__item">{donation.amount}</td>
+              <td className="donation-table__item">{jsDate(donation.expires)}</td>
+              <button className="rest-donation__item--delete" onClick={()=>openAddModal(donation)}>
+                 <SiAddthis />
+             </button>
+            </tr>
+            // <form
+            //   className="rest-donation"
+            //   onSubmit={(event) => deleteModalOpen(event, donation.id)}
+            //   key={donation.id}
+            // >
+            //   <input
+            //     className="rest-donation__item--hidden"
+            //     name="id"
+            //     value={donation.id}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="type"
+            //     value={donation.type}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="description"
+            //     value={donation.description}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="amount"
+            //     value={donation.amount}
+            //     readOnly
+            //   />
+            //   <input
+            //     className="rest-donation__item"
+            //     name="expires"
+            //     defaultValue={jsDate(donation.expires)}
+            //   />
+            //   <button className="rest-donation__item--delete" type="submit">
+            //     <AiTwotoneDelete />
+            //   </button>
+            // </form>
+            );
+          })}
+          </table>
+          </div>
         <button className="donations-form__btn" onClick={() => logOut()}>
           Logout
         </button>

@@ -33,16 +33,20 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
   const deleteDonation = () => {
     axios
       .delete(`http://localhost:8000/donations/${currentDonationId}`)
-      .then((response) => console.log(response.data.message), setOpenDeleteModal(false), refresh())
+      .then(
+        (response) => console.log(response.data.message),
+        setOpenDeleteModal(false),
+        refresh()
+      )
 
       .catch((error) => console.log(error));
   };
 
   const deleteModalOpen = (donationId) => {
-    // event.preventDefault();
     setCurrentDonationId(donationId);
     setOpenDeleteModal(true);
   };
+
   const closeDeleteModal = () => {
     setOpenDeleteModal(false);
   };
@@ -50,6 +54,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
   const openDonationModal = () => {
     setOpenModal(true);
   };
+  
   const refresh = () => {
     shouldRefresh ? setShouldRefresh(false) : setShouldRefresh(true);
   };
@@ -61,8 +66,9 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
     (donation) => donation.user_id === userdata.id
   );
 
-
-  const restId = userDonations.filter(donation => donation.user_id === userdata.id)
+  const restId = userDonations.filter(
+    (donation) => donation.user_id === userdata.id
+  );
   console.log(eachDonations);
   console.log(allUsers);
   console.log(restId);
@@ -76,62 +82,31 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
       <div className="donation-box">
         <h1 className="donation-box__title">Welcome back! {userdata.name}</h1>
         <div className="donation-tablebox">
-        <table className = "donation-table">
-        <DonationsHeader />
+          <table className="donation-table">
+            <DonationsHeader />
 
-        {eachDonations.map((donation) => {
-          return (
-            <tr className = "donation-table__row" key={donation.id}>
-              <td className="donation-table__item">{donation.type}</td>
-              <td  className="donation-table__item">{donation.description}</td>
-              <td className="donation-table__item">{donation.amount}</td>
-              <td className="donation-table__item">{jsDate(donation.expires)}</td>
-              <button className="rest-donation__item--delete" onClick={()=>deleteModalOpen(donation.id)}>
-                 <AiTwotoneDelete />
-             </button>
-            </tr>
-            // <form
-            //   className="rest-donation"
-            //   onSubmit={(event) => deleteModalOpen(event, donation.id)}
-            //   key={donation.id}
-            // >
-            //   <input
-            //     className="rest-donation__item--hidden"
-            //     name="id"
-            //     value={donation.id}
-            //     readOnly
-            //   />
-            //   <input
-            //     className="rest-donation__item"
-            //     name="type"
-            //     value={donation.type}
-            //     readOnly
-            //   />
-            //   <input
-            //     className="rest-donation__item"
-            //     name="description"
-            //     value={donation.description}
-            //     readOnly
-            //   />
-            //   <input
-            //     className="rest-donation__item"
-            //     name="amount"
-            //     value={donation.amount}
-            //     readOnly
-            //   />
-            //   <input
-            //     className="rest-donation__item"
-            //     name="expires"
-            //     defaultValue={jsDate(donation.expires)}
-            //   />
-            //   <button className="rest-donation__item--delete" type="submit">
-            //     <AiTwotoneDelete />
-            //   </button>
-            // </form>
-            );
-          })}
+            {eachDonations.map((donation) => {
+              return (
+                <tr className="donation-table__row" key={donation.id}>
+                  <td className="donation-table__item">{donation.type}</td>
+                  <td className="donation-table__item">
+                    {donation.description}
+                  </td>
+                  <td className="donation-table__item">{donation.amount}</td>
+                  <td className="donation-table__item">
+                    {jsDate(donation.expires)}
+                  </td>
+                  <button
+                    className="rest-donation__item--delete"
+                    onClick={() => deleteModalOpen(donation.id)}
+                  >
+                    <AiTwotoneDelete />
+                  </button>
+                </tr>
+              );
+            })}
           </table>
-          </div>
+        </div>
         {openDeleteModal && (
           <DeleteModal
             closeDeleteModal={closeDeleteModal}
