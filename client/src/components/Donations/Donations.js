@@ -8,6 +8,7 @@ import DonationsHeader from "../DonationsHeader/DonationsHeader";
 import "./Donations.scss";
 
 const Donations = ({ userdata, history, logout, allUsers }) => {
+  
   const PORT = process.env.PORT || 8000;
   const dbUrl = `http://localhost:${PORT}`;
 
@@ -32,7 +33,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
 
   const deleteDonation = () => {
     axios
-      .delete(`http://localhost:8000/donations/${currentDonationId}`)
+      .delete(`${dbUrl}/donations/${currentDonationId}`)
       .then(
         (response) => console.log(response.data.message),
         setOpenDeleteModal(false),
@@ -66,15 +67,7 @@ const Donations = ({ userdata, history, logout, allUsers }) => {
     (donation) => donation.user_id === userdata.id
   );
 
-  const restId = userDonations.filter(
-    (donation) => donation.user_id === userdata.id
-  );
-  console.log(eachDonations);
-  console.log(allUsers);
-  console.log(restId);
-  // const restName = restId.filter(user => eachDonations.user_id === user.id)
-  // console.log(restName);
-  // const donationsID = eachDonations.filter(donation => donation.user_id === )
+
   return isLoading ? (
     <p>patience is a virtue</p>
   ) : (

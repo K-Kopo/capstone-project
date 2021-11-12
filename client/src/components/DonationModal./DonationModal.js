@@ -3,6 +3,12 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./DonationModal.scss";
 
+const dotenv = require("dotenv")
+dotenv.config()
+
+const PORT = process.env.PORT || 8000;
+const dbUrl = `http://localhost:${PORT}`;
+
 const DonationModal = ({ userData, closeModal, refreshPage }) => {
   const [values, setValues] = useState({
     type: "",
@@ -36,7 +42,7 @@ const DonationModal = ({ userData, closeModal, refreshPage }) => {
       setIsValid(true);
     }
     axios
-      .post("http://localhost:8000/donations", {
+      .post(`${dbUrl}/donations`, {
         user_id: userData.id,
         ...values,
       })

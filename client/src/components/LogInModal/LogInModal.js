@@ -3,6 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import "./LogInModal.scss";
 
+const dotenv = require("dotenv")
+dotenv.config()
+
+const PORT = process.env.PORT || 8000;
+const dbUrl = `http://localhost:${PORT}`;
+
 const LogInModal = ({ closeModal }) => {
   const [userData, setUserData] = useState([]);
   const [submitted, setSubmitted] = useState(false);
@@ -27,7 +33,7 @@ const LogInModal = ({ closeModal }) => {
     setSubmitted(true);
     if (values.username && values.password)
       axios
-        .post("http://localhost:8000/users/login", {
+        .post(`${dbUrl}/users/login`, {
           ...values,
         })
         .then((res) => {
@@ -42,7 +48,7 @@ const LogInModal = ({ closeModal }) => {
           history.push(`/users/${userLog.id}`, {loggedIn: true});
         })
         .catch((error) => {
-          setErrorMessage(`this is your error: ${error}`);
+          setErrorMessage(`${error}`);
         });
   };
   useEffect(() => {
@@ -53,7 +59,7 @@ const LogInModal = ({ closeModal }) => {
       setLoggedIn(true);
     }
     axios
-      .get("http://localhost:8000/users")
+      .get(`${dbUrl}/users`)
       .then((response) => {
         if (isSubscribed) return setUserData(response.data);
       })
@@ -62,8 +68,8 @@ const LogInModal = ({ closeModal }) => {
   }, []);
   return (
     <div className="login">
-      {errorMessage}
       <form className="login__form" onSubmit={handleOnSubmit}>
+      {submitted && errorMessage ? <span className="login__error" >{errorMessage}</span> : null }
         <label className="login__form--label" htmlFor="username">
           Username
         </label>

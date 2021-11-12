@@ -7,13 +7,14 @@ import { AiOutlineClose } from "react-icons/ai";
 const Header = () => {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+
   return (
     <>
       <div className="header">
-        <Link className="header__home" to="#">
-          <FaBars className="header__bars" onClick={showSidebar} />
-        </Link>
        <Link to="/" ><p className="header__title">Second Helpings</p></Link>
+        <Link className="header__home" to="#">
+          <FaBars className={sidebar ? "header__bars hidden" : "header__bars"}onClick={showSidebar} />
+        </Link>
       </div>
       <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
         <ul className="nav-menu__items" onClick={showSidebar}>

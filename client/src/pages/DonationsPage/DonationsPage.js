@@ -7,7 +7,10 @@ import DonationsHeader from "../../components/DonationsHeader/DonationsHeader";
 import AddDonationModal from "../../components/AddDonationModal/AddDonationModal";
 import "../../components/Donations/Donations.scss"
 
-const PORT = 8000;
+const dotenv = require("dotenv")
+dotenv.config()
+
+const PORT = process.env.PORT || 8000;
 const dbUrl = `http://localhost:${PORT}`;
 
 const DonationsPage = ({ match, history }) => {
