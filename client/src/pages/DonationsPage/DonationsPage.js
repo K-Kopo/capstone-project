@@ -134,7 +134,8 @@ const DonationsPage = ({ match, history }) => {
 
             {filteredDonations.map((donation) => {
               return (
-                <tr className="donation-table__row" key={donation.id}>
+                <tbody key={donation.id}>
+                <tr className="donation-table__row" >
                   <td className="donation-table__item">{donation.rest_name}</td>
                   <td className="donation-table__item">{donation.type}</td>
                   <td className="donation-table__item">
@@ -151,6 +152,7 @@ const DonationsPage = ({ match, history }) => {
                     <SiAddthis />
                   </td>
                 </tr>
+                </tbody>
               );
             })}
           </table>
